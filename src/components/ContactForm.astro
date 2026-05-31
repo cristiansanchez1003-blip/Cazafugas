@@ -1,0 +1,162 @@
+---
+const communes = ['Puente Alto', 'La Florida', 'Macul', 'San Jose de Maipo'];
+---
+
+<section id="contacto" class="w-full max-w-full overflow-x-hidden bg-brand-surface px-4 py-16 sm:px-6 md:px-8 md:py-28">
+  <div
+    data-reveal
+    class="mx-auto grid max-w-6xl grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-2xl drop-shadow-[0_28px_70px_rgba(15,23,42,0.16)] md:grid-cols-[0.95fr_1.35fr]"
+  >
+    <div class="bg-gradient-to-br from-blue-900 to-blue-800 p-6 text-white sm:p-8 md:p-12">
+      <p class="font-sans text-xs font-black uppercase tracking-[0.18em] text-cyan-200">
+        Atencion prioritaria
+      </p>
+      <h2 class="mt-4 max-w-sm font-heading text-4xl font-extrabold leading-tight md:text-5xl">
+        Respuesta Rapida
+      </h2>
+      <p class="mt-6 max-w-md font-sans text-base leading-relaxed text-blue-100">
+        Nuestros especialistas en deteccion de fugas estan listos para intervenir con tecnologia de grado industrial.
+        Solicite un presupuesto en menos de un minuto.
+      </p>
+
+      <ul class="mt-10 space-y-5 font-sans text-xs font-black uppercase text-blue-50">
+        <li class="flex items-center gap-3">
+          <span class="flex size-8 items-center justify-center rounded-full bg-cyan-400/20 text-cyan-200">⏱</span>
+          Atencion en minutos
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="flex size-8 items-center justify-center rounded-full bg-cyan-400/20 text-cyan-200">✓</span>
+          Tecnicos certificados SEC
+        </li>
+      </ul>
+    </div>
+
+    <form data-contact-form class="grid gap-5 p-6 sm:p-8 md:p-12" novalidate>
+      <div>
+        <label for="name" class="mb-2 block font-sans text-sm font-semibold text-slate-700">
+          Nombre completo
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          placeholder="Ej. Juan Perez"
+          required
+          class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 font-sans text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div>
+          <label for="phone" class="mb-2 block font-sans text-sm font-semibold text-slate-700">
+            Telefono
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            placeholder="+56 9 1234 5678"
+            required
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 font-sans text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label for="commune" class="mb-2 block font-sans text-sm font-semibold text-slate-700">
+            Comuna
+          </label>
+          <select
+            id="commune"
+            name="commune"
+            required
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 font-sans text-sm text-slate-900 outline-none transition-all duration-300 focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Seleccione comuna</option>
+            {communes.map((commune) => <option value={commune}>{commune}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label for="problem" class="mb-2 block font-sans text-sm font-semibold text-slate-700">
+          Descripcion del problema
+        </label>
+        <textarea
+          id="problem"
+          name="problem"
+          rows="5"
+          placeholder="Cuéntanos qué ocurre: fuga visible, humedad, baja presión, calefón..."
+          required
+          class="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 font-sans text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+      </div>
+
+      <p data-contact-status class="min-h-5 font-sans text-sm font-semibold text-brand-red" aria-live="polite"></p>
+
+      <button
+        data-submit-button
+        type="submit"
+        class="block min-h-14 w-full rounded-xl bg-blue-900 px-6 py-4 font-sans text-sm font-bold uppercase text-white shadow-lg shadow-blue-900/20 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-wait disabled:opacity-70"
+      >
+        <span class="inline-flex items-center justify-center gap-3">
+          Solicitar cotizacion
+          <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12h13m0 0-5-5m5 5-5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<script is:inline>
+  const form = document.querySelector('[data-contact-form]');
+  const button = document.querySelector('[data-submit-button]');
+  const statusMessage = document.querySelector('[data-contact-status]');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!button || !statusMessage) return;
+
+    const originalContent = button.innerHTML;
+    button.disabled = true;
+    button.textContent = 'Cargando...';
+    statusMessage.textContent = '';
+
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get('name') || '').trim(),
+      phone: String(formData.get('phone') || '').trim(),
+      commune: String(formData.get('commune') || '').trim(),
+      problem: String(formData.get('problem') || '').trim()
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.url) {
+        throw new Error(data.error || 'No pudimos generar el enlace de WhatsApp.');
+      }
+
+      window.location.href = data.url;
+    } catch (error) {
+      statusMessage.textContent = error instanceof Error ? error.message : 'Ocurrio un error. Intentalo nuevamente.';
+      button.disabled = false;
+      button.innerHTML = originalContent;
+    }
+  });
+</script>
