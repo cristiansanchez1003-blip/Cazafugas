@@ -1,16 +1,6 @@
 ---
 const services = [
   {
-    id: 'fugas',
-    title: 'Detección de Fugas de Agua y Gas',
-    short: 'Localizacion precisa con tecnologia no invasiva.',
-    modalTitle: 'Detección de fugas con tecnología ultrasónica.',
-    detail:
-      'No rompas paredes innecesariamente. Utilizamos equipos de termografía y ultrasonido para localizar el origen exacto de la filtración. Diagnóstico rápido, preciso y profesional para evitar daños mayores.',
-    cta: 'Solicitar detección urgente',
-    image: '/images/servicios/fugas.webp'
-  },
-  {
     id: 'calefones',
     title: 'Mantención y Reparación de Calefones',
     short: 'Diagnostico y mantencion para agua caliente segura.',
@@ -19,6 +9,16 @@ const services = [
       '¿Tu calefón falla en el peor momento? Realizamos mantenimiento preventivo y reparación técnica certificada para equipos de todas las marcas. Aseguramos eficiencia energética y, sobre todo, máxima seguridad para tu familia.',
     cta: 'Agendar mantenimiento ahora',
     image: '/images/servicios/calefones.webp'
+  },
+  {
+    id: 'fugas',
+    title: 'Detección de Fugas de Agua y Gas',
+    short: 'Localizacion precisa con tecnologia no invasiva.',
+    modalTitle: 'Detección de fugas con tecnología ultrasónica.',
+    detail:
+      'No rompas paredes innecesariamente. Utilizamos equipos de termografía y ultrasonido para localizar el origen exacto de la filtración. Diagnóstico rápido, preciso y profesional para evitar daños mayores.',
+    cta: 'Solicitar detección urgente',
+    image: '/images/servicios/fugas.webp'
   },
   {
     id: 'redes',
@@ -70,7 +70,11 @@ const services = [
         services.map((service) => (
           <article
             data-reveal
-            class="group relative min-h-[25rem] overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl shadow-black/20 backdrop-blur-lg transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 focus-within:-translate-y-1 focus-within:bg-white/20"
+            class={`group relative min-h-[25rem] overflow-hidden rounded-3xl border bg-white/10 p-8 shadow-2xl backdrop-blur-lg transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 focus-within:-translate-y-1 focus-within:bg-white/20 ${
+              service.id === 'calefones'
+                ? 'border-emerald-300/60 shadow-emerald-500/25 ring-2 ring-emerald-300/40 lg:scale-[1.03]'
+                : 'border-white/20 shadow-black/20'
+            }`}
           >
             <img
               src={service.image}
@@ -83,6 +87,13 @@ const services = [
             <div class="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent"></div>
 
             <div class="flex h-full flex-col justify-end">
+              {
+                service.id === 'calefones' && (
+                  <span class="mb-5 inline-flex w-fit rounded-full border border-emerald-200/50 bg-emerald-400/20 px-4 py-2 font-sans text-xs font-black uppercase tracking-[0.14em] text-emerald-100 backdrop-blur-md">
+                    Servicio destacado
+                  </span>
+                )
+              }
               <img
                 src="/assets/logotipo-cazafugas.png"
                 alt=""
