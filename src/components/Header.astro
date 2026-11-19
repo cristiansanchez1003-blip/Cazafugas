@@ -1,4 +1,6 @@
 ---
+import { BUSINESS, telLink } from '@config/business';
+
 const navItems = [
   { href: '#servicios', label: 'Servicios' },
   { href: '#sectores', label: 'Sectores' },
@@ -33,10 +35,13 @@ const navItems = [
     </nav>
 
     <a
-      href="tel:+56912345678"
-      class="rounded-lg bg-brand-red px-5 py-3 text-xs font-black uppercase text-white shadow-lg shadow-red-600/20 transition hover:scale-[1.02] hover:bg-red-700 focus:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+      href={telLink()}
+      class="inline-flex items-center gap-3 rounded-lg bg-brand-red px-5 py-3 text-xs font-black uppercase text-white shadow-lg shadow-red-600/20 transition hover:scale-[1.02] hover:bg-red-700 focus:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
     >
       Llamar ahora
+      <span class="hidden border-l border-white/40 pl-3 text-sm normal-case tracking-normal lg:inline">
+        {BUSINESS.phoneDisplay}
+      </span>
     </a>
   </div>
 </header>
