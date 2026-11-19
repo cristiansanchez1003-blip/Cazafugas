@@ -9,24 +9,24 @@ import { BUSINESS } from '@config/business';
   >
     <div class="bg-gradient-to-br from-blue-900 to-blue-800 p-6 text-white sm:p-8 md:p-12">
       <p class="font-sans text-xs font-black uppercase tracking-[0.18em] text-cyan-200">
-        Atencion prioritaria
+        Atención prioritaria
       </p>
       <h2 class="mt-4 max-w-sm font-heading text-4xl font-extrabold leading-tight md:text-5xl">
-        Respuesta Rapida
+        Respuesta Rápida
       </h2>
       <p class="mt-6 max-w-md font-sans text-base leading-relaxed text-blue-100">
-        Nuestros especialistas en deteccion de fugas estan listos para intervenir con tecnologia de grado industrial.
+        Nuestros especialistas en detección de fugas están listos para intervenir con tecnología de grado industrial.
         Solicite un presupuesto en menos de un minuto.
       </p>
 
       <ul class="mt-10 space-y-5 font-sans text-xs font-black uppercase text-blue-50">
         <li class="flex items-center gap-3">
           <span class="flex size-8 items-center justify-center rounded-full bg-cyan-400/20 text-cyan-200">⏱</span>
-          Atencion en minutos
+          Atención en minutos
         </li>
         <li class="flex items-center gap-3">
           <span class="flex size-8 items-center justify-center rounded-full bg-cyan-400/20 text-cyan-200">✓</span>
-          Tecnicos certificados SEC
+          Técnicos certificados SEC
         </li>
       </ul>
     </div>
@@ -41,7 +41,7 @@ import { BUSINESS } from '@config/business';
           name="name"
           type="text"
           autocomplete="name"
-          placeholder="Ej. Juan Perez"
+          placeholder="Ej. Juan Pérez"
           required
           class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 font-sans text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500"
         />
@@ -50,7 +50,7 @@ import { BUSINESS } from '@config/business';
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
         <div>
           <label for="phone" class="mb-2 block font-sans text-sm font-semibold text-slate-700">
-            Telefono
+            Teléfono
           </label>
           <input
             id="phone"
@@ -81,7 +81,7 @@ import { BUSINESS } from '@config/business';
 
       <div>
         <label for="problem" class="mb-2 block font-sans text-sm font-semibold text-slate-700">
-          Descripcion del problema
+          Descripción del problema
         </label>
         <textarea
           id="problem"
@@ -101,7 +101,7 @@ import { BUSINESS } from '@config/business';
         class="block min-h-14 w-full rounded-xl bg-blue-900 px-6 py-4 font-sans text-sm font-bold uppercase text-white shadow-lg shadow-blue-900/20 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-wait disabled:opacity-70"
       >
         <span class="inline-flex items-center justify-center gap-3">
-          Solicitar cotizacion
+          Solicitar cotización
           <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none">
             <path
               d="M5 12h13m0 0-5-5m5 5-5 5"
@@ -154,7 +154,7 @@ import { BUSINESS } from '@config/business';
 
       window.location.href = data.url;
     } catch (error) {
-      statusMessage.textContent = error instanceof Error ? error.message : 'Ocurrio un error. Intentalo nuevamente.';
+      statusMessage.textContent = error instanceof Error ? error.message : 'Ocurrió un error. Inténtalo nuevamente.';
       button.disabled = false;
       button.innerHTML = originalContent;
     }

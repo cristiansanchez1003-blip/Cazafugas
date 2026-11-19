@@ -12,7 +12,7 @@ type ContactPayload = {
 
 const fieldLabels: Record<keyof ContactPayload, string> = {
   name: 'nombre',
-  phone: 'telefono',
+  phone: 'teléfono',
   commune: 'comuna',
   problem: 'problema'
 };
@@ -76,5 +76,5 @@ export const POST: APIRoute = async ({ request }) => {
 };
 
 export const GET: APIRoute = async () => {
-  return jsonResponse({ error: 'Metodo no permitido.' }, 405);
+  return jsonResponse({ error: 'Método no permitido.' }, 405);
 };
