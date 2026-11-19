@@ -66,6 +66,17 @@ h2 {
   image-rendering: auto;
 }
 
+/* Barra fija de contacto en móvil (MobileCtaBar): 56 px + zona segura del iPhone */
+.mobile-cta-bar {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .glass-ready {
   transition:
     background-color 220ms ease,
