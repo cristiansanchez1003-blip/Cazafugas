@@ -21,6 +21,21 @@ const imageAlt = `${BUSINESS.name}: detección de fugas y gasfitería`;
 <html lang="es-CL">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      // Capa de datos: clics en tel: y wa.me. Cada enlace lleva data-cta
+      // (header, hero, barra_movil, modal, contacto, footer) y los del modal data-service.
+      window.dataLayer = window.dataLayer || [];
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me/"]');
+        if (!a) return;
+        const isTel = a.href.startsWith('tel:');
+        window.dataLayer.push({
+          event: isTel ? 'tel_click' : 'whatsapp_click',
+          cta_location: a.dataset.cta || 'sin_definir',
+          service: a.dataset.service || undefined,
+        });
+      });
+    </script>
     {
       GTM_ID && (
         <script is:inline define:vars={{ GTM_ID }}>

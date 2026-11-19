@@ -156,6 +156,7 @@ const servicesData = services.map((service) => ({
 
       <a
         data-modal-whatsapp
+        data-cta="modal"
         href="#contacto"
         class="mt-8 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02] hover:from-green-400 hover:to-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
       >
@@ -181,6 +182,7 @@ const servicesData = services.map((service) => ({
     modalDescription.textContent = service.detail;
     modalWhatsapp.textContent = service.cta;
     modalWhatsapp.href = service.waHref;
+    modalWhatsapp.dataset.service = service.id;
 
     modal.classList.remove('hidden');
     modal.classList.add('flex');
