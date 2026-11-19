@@ -1,5 +1,10 @@
 ---
-import { communesText, telLink, waLink } from '@config/business';
+import { Image } from 'astro:assets';
+import { BUSINESS, communesText, telLink, waLink } from '@config/business';
+
+// TODO(confirmar): foto real de Don Hernán trabajando (PLAN-MAESTRO 2.2). Cuando llegue,
+// guardarla en src/assets/ e importarla aquí; mientras tanto se muestra solo el sello SEC.
+const heroPhoto: ImageMetadata | null = null;
 
 const heroImages = [
   '/images/carrusel-1.webp',
@@ -33,11 +38,11 @@ const heroImages = [
     <div class="absolute inset-0 bg-black/60"></div>
   </div>
 
-  <div class="relative z-10 mx-auto grid min-h-screen w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 pb-10 pt-[calc(var(--header-height)+1.5rem)] text-center sm:px-6 md:grid-cols-2 md:gap-10 md:px-8 md:pb-0 md:pt-[var(--header-height)] md:text-left">
+  <div class="relative z-10 mx-auto grid min-h-screen w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 pb-10 pt-[calc(var(--header-height)+1.5rem)] text-center sm:px-6 md:grid-cols-[1.618fr_1fr] md:gap-fib-5 md:px-8 md:pb-0 md:pt-[var(--header-height)] md:text-left">
     <div class="flex flex-col items-center md:items-start">
       <img
         src="/assets/certificacion-sec-title.png"
-        alt="SEC"
+        alt="Personal certificado SEC"
         class="image-high-quality mb-6 h-28 max-w-full transform-gpu rounded-full border border-white/20 p-2 object-contain antialiased drop-shadow-lg sm:h-[9.1rem] md:hidden"
         loading="eager"
         decoding="async"
@@ -56,7 +61,15 @@ const heroImages = [
         Atendemos en {communesText()}.
       </p>
 
-      <div class="mt-8 flex w-full max-w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:gap-4">
+      <p
+        data-after-hours
+        hidden
+        class="mt-6 max-w-full rounded-lg border border-amber-300/50 bg-amber-400/15 px-4 py-2 text-sm font-semibold text-amber-50"
+        aria-live="polite"
+      >
+      </p>
+
+      <div class="mt-6 flex w-full max-w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
         <a
           href={waLink()}
           data-cta="hero"
@@ -76,16 +89,42 @@ const heroImages = [
           Llamar ahora
         </a>
       </div>
+
+      <p class="mt-4 text-sm font-bold text-emerald-100">
+        <span aria-hidden="true">✓</span> Pagas al terminar. Sin anticipos.
+      </p>
     </div>
 
     <div class="hidden max-w-full items-center justify-center md:flex">
-      <img
-        src="/assets/certificacion-sec-title.png"
-        alt="SEC"
-        class="image-high-quality h-56 max-w-full transform-gpu rounded-full border border-white/20 p-2 object-contain antialiased drop-shadow-lg lg:h-[15.6rem]"
-        loading="lazy"
-        decoding="async"
-      />
+      {
+        heroPhoto ? (
+          <div class="relative w-full max-w-sm">
+            <Image
+              src={heroPhoto}
+              alt={`${BUSINESS.name} trabajando`}
+              class="aspect-[4/5] w-full rounded-3xl border border-white/20 object-cover shadow-2xl shadow-black/40"
+              width={768}
+              format="webp"
+              loading="lazy"
+            />
+            <img
+              src="/assets/certificacion-sec-title.png"
+              alt="Personal certificado SEC"
+              class="absolute -bottom-fib-4 -left-fib-4 h-32 w-32 rounded-full border border-white/30 bg-white/90 p-1 object-contain shadow-xl"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        ) : (
+          <img
+            src="/assets/certificacion-sec-title.png"
+            alt="Personal certificado SEC"
+            class="image-high-quality h-56 max-w-full transform-gpu rounded-full border border-white/20 p-2 object-contain antialiased drop-shadow-lg lg:h-[15.6rem]"
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
     </div>
   </div>
 </section>
