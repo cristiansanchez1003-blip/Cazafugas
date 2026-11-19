@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { BUSINESS, waLink } from '@config/business';
+import logo from '../assets/logo-mister-gas.png';
 
 const services = [
   {
@@ -105,10 +107,14 @@ const servicesData = services.map((service) => ({
                   </span>
                 )
               }
-              <img
-                src="/assets/logotipo-cazafugas.png"
+              <Image
+                src={logo}
                 alt=""
                 class="mb-6 size-24 object-contain drop-shadow-lg"
+                width={172}
+                height={192}
+                format="webp"
+                quality={75}
                 loading="lazy"
                 decoding="async"
               />

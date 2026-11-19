@@ -1,16 +1,20 @@
 ---
+import { Image } from 'astro:assets';
 import { BUSINESS, telLink, hoursText } from '@config/business';
+import logo from '../assets/logo-mister-gas.png';
 ---
 
 <footer class="w-full max-w-full overflow-x-hidden border-t border-gray-100 bg-white px-4 text-center sm:px-6 md:px-8 md:text-left">
   <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 py-12 md:grid-cols-4">
     <div class="flex flex-col items-center md:items-start">
-      <img
-        src="/assets/logotipo-cazafugas.png"
+      <Image
+        src={logo}
         alt="Cazafugas"
         class="h-20 w-auto object-contain"
-        width="220"
-        height="220"
+        width={143}
+        height={160}
+        format="webp"
+        quality={75}
         loading="lazy"
         decoding="async"
       />
