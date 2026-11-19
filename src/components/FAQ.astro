@@ -1,4 +1,6 @@
 ---
+import { BUSINESS } from '@config/business';
+
 const questions = [
   {
     question: 'Como funciona la deteccion de fugas sin romper?',
@@ -11,7 +13,7 @@ const questions = [
   {
     question: 'Cual es su horario de atencion?',
     answer:
-      'Atendemos de lunes a viernes de 09:00 a 18:00 hrs. No realizamos trabajos en horario nocturno para garantizar la calidad y seguridad de nuestras intervenciones.'
+      `Atendemos de ${BUSINESS.hours.days.toLowerCase()} de ${BUSINESS.hours.open} a ${BUSINESS.hours.close} hrs. No realizamos trabajos en horario nocturno para garantizar la calidad y seguridad de nuestras intervenciones.`
   }
 ];
 ---

@@ -1,0 +1,32 @@
+// src/config/business.ts
+// Único lugar para los datos del negocio (regla 7 del PLAN-MAESTRO).
+// Ningún teléfono, comuna u horario se escribe a mano en los componentes.
+export const BUSINESS = {
+  name: 'Mister Gas', // TODO(confirmar) escritura exacta con Don Hernán
+  domain: 'https://mistergas.cl',
+  phoneE164: '+56983030716', // TODO(confirmar) que es el que contesta
+  phoneDisplay: '+56 9 8303 0716',
+  whatsapp: '56983030716',
+  communes: ['Puente Alto', 'La Florida', 'Macul', 'San José de Maipo', 'Pirque'],
+  hours: { days: 'Lunes a viernes', open: '09:00', close: '18:00' },
+  services: [
+    { id: 'fugas', name: 'Detección de fugas de agua y gas' },
+    { id: 'reparacion', name: 'Reparación de fugas' },
+    { id: 'calefones', name: 'Instalación y mantención de calefones' },
+    { id: 'redes', name: 'Redes de agua potable y sanitarias' },
+    { id: 'destapes', name: 'Destapes y limpieza de cañerías' },
+    { id: 'griferia', name: 'Reparación de grifería y artefactos' },
+  ],
+} as const;
+
+export const waLink = (text = 'Hola, necesito un gasfiter. Mi comuna es: ') =>
+  `https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(text)}`;
+export const telLink = () => `tel:${BUSINESS.phoneE164}`;
+
+/** "Puente Alto, La Florida, Macul, San José de Maipo y Pirque" */
+export const communesText = () =>
+  new Intl.ListFormat('es', { style: 'long', type: 'conjunction' }).format(BUSINESS.communes);
+
+/** "Lunes a viernes de 09:00 a 18:00 hrs." */
+export const hoursText = () =>
+  `${BUSINESS.hours.days} de ${BUSINESS.hours.open} a ${BUSINESS.hours.close} hrs.`;

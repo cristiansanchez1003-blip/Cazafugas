@@ -1,8 +1,7 @@
 import type { APIRoute } from 'astro';
+import { BUSINESS, waLink } from '../../config/business';
 
 export const prerender = false;
-
-const WHATSAPP_PHONE = '56983030716';
 
 type ContactPayload = {
   name: string;
@@ -70,8 +69,8 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse({ error: 'Faltan datos obligatorios.', errors }, 400);
   }
 
-  const message = `Hola Cazafugas. Soy ${payload.name}, estoy en ${payload.commune}. Mi problema es: ${payload.problem}. Mi teléfono es ${payload.phone}.`;
-  const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+  const message = `Hola ${BUSINESS.name}. Soy ${payload.name}, estoy en ${payload.commune}. Mi problema es: ${payload.problem}. Mi teléfono es ${payload.phone}.`;
+  const url = waLink(message);
 
   return jsonResponse({ url });
 };
