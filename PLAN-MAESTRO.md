@@ -188,6 +188,21 @@ setTimeout(go, 900);
 
   Agregar `form_start` en el primer `focus` del formulario y `service_modal_open` al abrir un modal.
 - [ ] **1.4 GTM (se hace en la interfaz, no en el código; dejar documentado aquí):** etiqueta de Google GA4; eventos GA4 para `tel_click`, `whatsapp_click`, `generate_lead`, `form_start`, `service_modal_open` con sus parámetros; vinculación de conversiones y etiquetas de conversión de Google Ads para los tres principales. Marcar los tres como eventos clave en GA4.
+
+  Configuración exacta (corresponde a lo que el código empuja a `dataLayer`):
+
+  | Tipo en GTM | Nombre | Detalle |
+  | --- | --- | --- |
+  | Variable · Data Layer Variable | `DLV - cta_location`, `DLV - service`, `DLV - commune`, `DLV - form_id` | Versión 2, nombre de la variable igual al parámetro |
+  | Activador · Evento personalizado | `CE - tel_click`, `CE - whatsapp_click`, `CE - generate_lead`, `CE - form_start`, `CE - service_modal_open` | Nombre del evento exactamente igual |
+  | Etiqueta · Etiqueta de Google | `GA4 - Config` | ID `G-…` de la propiedad; activador *Initialization - All Pages* |
+  | Etiqueta · Evento de GA4 | `GA4 - tel_click` y `GA4 - whatsapp_click` | Parámetros `cta_location` y `service` |
+  | Etiqueta · Evento de GA4 | `GA4 - generate_lead` | Parámetro `commune` |
+  | Etiqueta · Evento de GA4 | `GA4 - form_start` / `GA4 - service_modal_open` | Parámetros `form_id` / `service` |
+  | Etiqueta · Vinculación de conversiones | `Ads - Conversion Linker` | *All Pages* |
+  | Etiqueta · Seguimiento de conversiones de Google Ads | `Ads - Llamada (clic)`, `Ads - WhatsApp`, `Ads - Formulario` | ID y etiqueta de cada conversión creada en Ads; activadores `CE - tel_click`, `CE - whatsapp_click`, `CE - generate_lead` |
+
+  En GA4: marcar `tel_click`, `whatsapp_click` y `generate_lead` como eventos clave y registrar `cta_location`, `service` y `commune` como dimensiones personalizadas (alcance de evento). Para encender GTM en el sitio, poner el ID en `src/config/analytics.ts` (`GTM_ID`); mientras esté vacío, el snippet no se carga. Valores de `cta_location` en uso: `header`, `hero`, `barra_movil`, `modal`, `footer` (el bloque de contacto no tiene enlaces `tel:` ni `wa.me`; su conversión es `generate_lead`).
 - [ ] **1.5 Barra fija en móvil:** componente `MobileCtaBar.astro`, visible bajo 768 px, fija abajo, 56 px de alto, dos botones a lo ancho: "Llamar" (rojo de la marca) y "WhatsApp" (verde), con `data-cta="barra_movil"`. Agregar `padding-bottom` al `<body>` en móvil para que no tape el pie. Respetar `env(safe-area-inset-bottom)`.
 - [ ] **1.6 Logo:** exportar a WebP o AVIF a 2× del tamaño mostrado (unos 200 × 224 px, meta < 20 KB). Usar `<Image>` de Astro con `width` y `height`. Las copias decorativas de las tarjetas: `loading="lazy"` y tamaño real.
 - [ ] **1.7 Favicon:** `favicon.ico` 32 px, `apple-touch-icon.png` 180 px e `icon.svg` si hay versión vectorial.
