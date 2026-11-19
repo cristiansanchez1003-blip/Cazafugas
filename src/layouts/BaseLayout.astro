@@ -22,6 +22,10 @@ const imageAlt = `${BUSINESS.name}: detección de fugas y gasfitería`;
   <head>
     <meta charset="UTF-8" />
     <script is:inline>
+      // Las animaciones de data-reveal solo aplican con .js (ver global.css).
+      document.documentElement.classList.add('js');
+    </script>
+    <script is:inline>
       // Capa de datos: clics en tel: y wa.me. Cada enlace lleva data-cta
       // (header, hero, barra_movil, modal, contacto, footer) y los del modal data-service.
       window.dataLayer = window.dataLayer || [];
@@ -118,7 +122,7 @@ const imageAlt = `${BUSINESS.name}: detección de fugas y gasfitería`;
       syncHeader();
       window.addEventListener('scroll', syncHeader, { passive: true });
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && 'IntersectionObserver' in window) {
         const revealObserver = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
@@ -131,7 +135,6 @@ const imageAlt = `${BUSINESS.name}: detección de fugas y gasfitería`;
         );
 
         document.querySelectorAll('[data-reveal]').forEach((element, index) => {
-          element.classList.add('reveal');
           element.style.setProperty('--reveal-delay', `${Math.min(index % 6, 5) * 90}ms`);
           revealObserver.observe(element);
         });
