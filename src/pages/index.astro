@@ -9,6 +9,7 @@ import FAQ from '@components/FAQ.astro';
 import Footer from '@components/Footer.astro';
 import MobileCtaBar from '@components/MobileCtaBar.astro';
 import { BUSINESS, communesText } from '@config/business';
+import { faqJsonLd } from '../data/faq';
 
 export const prerender = true;
 
@@ -17,6 +18,7 @@ const description = `Detección de fugas sin romper, gasfitería y calefones en 
 ---
 
 <BaseLayout title={title} description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqJsonLd())} />
   <Header />
   <main>
     <Hero />

@@ -1,0 +1,33 @@
+// src/data/faq.ts
+// Preguntas frecuentes: se muestran en FAQ.astro y generan el JSON-LD FAQPage.
+// Regla 3 del plan: solo respuestas confirmadas por Don Hernán, nada inventado.
+import { BUSINESS } from '../config/business';
+
+export type FaqItem = { question: string; answer: string };
+
+export const FAQ: FaqItem[] = [
+  {
+    question: '¿Cómo funciona la detección de fugas sin romper?',
+    answer:
+      'Usamos equipos de ultrasonido, presión controlada y termografía para acotar el punto de filtración antes de intervenir.',
+  },
+  {
+    question: '¿Qué significa estar certificado por la SEC?',
+    answer:
+      'Significa que el técnico cumple exigencias normativas para trabajar instalaciones y equipos relacionados con gas y agua caliente.',
+  },
+  {
+    question: '¿Cuál es su horario de atención?',
+    answer: `Atendemos de ${BUSINESS.hours.days.toLowerCase()} de ${BUSINESS.hours.open} a ${BUSINESS.hours.close} hrs. No realizamos trabajos en horario nocturno para garantizar la calidad y seguridad de nuestras intervenciones.`,
+  },
+];
+
+export const faqJsonLd = (items: FaqItem[] = FAQ) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+});

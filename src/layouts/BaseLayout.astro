@@ -2,6 +2,8 @@
 import '@styles/global.css';
 import { BUSINESS } from '@config/business';
 import { GTM_ID } from '@config/analytics';
+import { getImage } from 'astro:assets';
+import logoSrc from '../assets/logo-mister-gas.png';
 
 interface Props {
   title: string;
@@ -15,6 +17,38 @@ const site = Astro.site ?? new URL(BUSINESS.domain);
 const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image, site).href;
 const imageAlt = `${BUSINESS.name}: detección de fugas y gasfitería`;
+
+// JSON-LD del negocio (completar los TODO de business.ts antes de publicar).
+const schemaLogo = await getImage({ src: logoSrc, width: 400, format: 'webp', quality: 80 });
+const businessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Plumber',
+  '@id': `${BUSINESS.domain}/#negocio`,
+  name: BUSINESS.name,
+  url: `${BUSINESS.domain}/`,
+  logo: new URL(schemaLogo.src, site).href,
+  image: new URL('/og.jpg', site).href,
+  telephone: BUSINESS.phoneE164,
+  areaServed: BUSINESS.communes.map((name) => ({ '@type': 'City', name })),
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: BUSINESS.hours.open,
+      closes: BUSINESS.hours.close,
+    },
+  ],
+  paymentAccepted: BUSINESS.paymentAccepted,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios de gasfitería',
+    itemListElement: BUSINESS.services.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: service.name },
+    })),
+  },
+  ...(BUSINESS.sameAs.length > 0 ? { sameAs: BUSINESS.sameAs } : {}),
+};
 ---
 
 <!doctype html>
@@ -86,6 +120,9 @@ const imageAlt = `${BUSINESS.name}: detección de fugas y gasfitería`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <meta name="twitter:image:alt" content={imageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(businessJsonLd)} />
+    <slot name="head" />
   </head>
   <body>
     {

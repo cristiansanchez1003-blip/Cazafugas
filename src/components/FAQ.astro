@@ -1,21 +1,5 @@
 ---
-import { BUSINESS } from '@config/business';
-
-const questions = [
-  {
-    question: '¿Cómo funciona la detección de fugas sin romper?',
-    answer: 'Usamos equipos de ultrasonido, presión controlada y termografía para acotar el punto de filtración antes de intervenir.'
-  },
-  {
-    question: '¿Qué significa estar certificado por la SEC?',
-    answer: 'Significa que el técnico cumple exigencias normativas para trabajar instalaciones y equipos relacionados con gas y agua caliente.'
-  },
-  {
-    question: '¿Cuál es su horario de atención?',
-    answer:
-      `Atendemos de ${BUSINESS.hours.days.toLowerCase()} de ${BUSINESS.hours.open} a ${BUSINESS.hours.close} hrs. No realizamos trabajos en horario nocturno para garantizar la calidad y seguridad de nuestras intervenciones.`
-  }
-];
+import { FAQ } from '../data/faq';
 ---
 
 <section id="preguntas" class="bg-brand-surface px-5 py-20 md:px-8 md:py-28">
@@ -23,7 +7,7 @@ const questions = [
     <h2 data-reveal class="text-center text-4xl font-black leading-tight text-brand-navy md:text-5xl">Preguntas Frecuentes</h2>
     <div class="mt-14 space-y-4">
       {
-        questions.map((item) => (
+        FAQ.map((item) => (
           <details data-reveal class="group rounded-lg border border-slate-200 bg-white px-6 py-5 shadow-sm">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-black uppercase text-slate-700">
               {item.question}

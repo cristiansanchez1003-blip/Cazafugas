@@ -9,6 +9,9 @@ export const BUSINESS = {
   whatsapp: '56983030716',
   communes: ['Puente Alto', 'La Florida', 'Macul', 'San José de Maipo', 'Pirque'],
   hours: { days: 'Lunes a viernes', open: '09:00', close: '18:00' },
+  paymentAccepted: 'Efectivo, transferencia, tarjetas', // TODO(confirmar)
+  // Perfiles oficiales para el JSON-LD (sameAs). TODO: URL de la ficha de Google Business.
+  sameAs: [] as string[],
   services: [
     { id: 'fugas', name: 'Detección de fugas de agua y gas' },
     { id: 'reparacion', name: 'Reparación de fugas' },
