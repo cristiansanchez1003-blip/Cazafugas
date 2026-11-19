@@ -9,7 +9,7 @@ import logo from '../assets/logo-mister-gas.png';
     <div class="flex flex-col items-center md:items-start">
       <Image
         src={logo}
-        alt="Cazafugas"
+        alt={BUSINESS.name}
         class="h-20 w-auto object-contain"
         width={143}
         height={160}
@@ -58,7 +58,7 @@ import logo from '../assets/logo-mister-gas.png';
   </div>
 
   <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-gray-100 py-6 font-sans text-xs leading-relaxed text-gray-500 md:flex-row">
-    <p>© 2026 CAZAFUGAS. Todos los derechos reservados.</p>
+    <p>© {new Date().getFullYear()} {BUSINESS.name}. Todos los derechos reservados.</p>
     <p>
       Esta página fue diseñada por:
       <a
