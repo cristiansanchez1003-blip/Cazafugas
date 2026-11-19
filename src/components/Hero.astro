@@ -1,4 +1,6 @@
 ---
+import { telLink, waLink } from '@config/business';
+
 const heroImages = [
   '/images/carrusel-1.webp',
   '/images/carrusel-2.webp',
@@ -57,7 +59,9 @@ const heroImages = [
 
       <div data-reveal class="mt-8 flex w-full max-w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:gap-4">
         <a
-          href="#contacto"
+          href={waLink()}
+          target="_blank"
+          rel="noopener"
           class="inline-flex min-h-14 w-full animate-soft-pulse items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02] hover:from-green-400 hover:to-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto sm:px-8"
         >
           <span aria-hidden="true">▣</span>
@@ -65,10 +69,10 @@ const heroImages = [
         </a>
 
         <a
-          href="#contacto"
-          class="inline-flex min-h-14 w-full items-center justify-center rounded-lg border border-white/70 bg-white/10 px-6 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-black/20 backdrop-blur-md transition hover:bg-white hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto sm:px-8"
+          href={telLink()}
+          class="order-first inline-flex min-h-14 w-full items-center justify-center rounded-lg border border-white/70 bg-white/10 px-6 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-black/20 backdrop-blur-md transition hover:bg-white hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto sm:px-8 md:order-none"
         >
-          Asesoría técnica
+          Llamar ahora
         </a>
       </div>
     </div>
