@@ -121,6 +121,13 @@ import { BUSINESS } from '@config/business';
   const form = document.querySelector('[data-contact-form]');
   const button = document.querySelector('[data-submit-button]');
   const statusMessage = document.querySelector('[data-contact-status]');
+  window.dataLayer = window.dataLayer || [];
+
+  form?.addEventListener(
+    'focusin',
+    () => window.dataLayer.push({ event: 'form_start', form_id: 'contacto' }),
+    { once: true }
+  );
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -152,7 +159,21 @@ import { BUSINESS } from '@config/business';
         throw new Error(data.error || 'No pudimos generar el enlace de WhatsApp.');
       }
 
-      window.location.href = data.url;
+      // generate_lead: redirige cuando GTM confirma el evento, o a los 800-900 ms si no responde.
+      let done = false;
+      const go = () => {
+        if (!done) {
+          done = true;
+          window.location.href = data.url;
+        }
+      };
+      window.dataLayer.push({
+        event: 'generate_lead',
+        commune: payload.commune,
+        eventCallback: go,
+        eventTimeout: 800
+      });
+      setTimeout(go, 900);
     } catch (error) {
       statusMessage.textContent = error instanceof Error ? error.message : 'Ocurrió un error. Inténtalo nuevamente.';
       button.disabled = false;

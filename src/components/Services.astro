@@ -183,6 +183,8 @@ const servicesData = services.map((service) => ({
     modalWhatsapp.textContent = service.cta;
     modalWhatsapp.href = service.waHref;
     modalWhatsapp.dataset.service = service.id;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'service_modal_open', service: service.id });
 
     modal.classList.remove('hidden');
     modal.classList.add('flex');
