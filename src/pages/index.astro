@@ -7,13 +7,14 @@ import Services from '@components/Services.astro';
 import TrustBand from '@components/TrustBand.astro';
 import FAQ from '@components/FAQ.astro';
 import Footer from '@components/Footer.astro';
+import { communesText } from '@config/business';
 
 export const prerender = true;
 ---
 
 <BaseLayout
   title="Cazafugas | Deteccion de Fugas y Gasfiteria Certificada"
-  description="Servicio profesional de deteccion de fugas, gasfiteria y reparaciones certificadas en Puente Alto, La Florida, Macul y San Jose de Maipo."
+  description={`Servicio profesional de deteccion de fugas, gasfiteria y reparaciones certificadas en ${communesText()}.`}
 >
   <Header />
   <main>
