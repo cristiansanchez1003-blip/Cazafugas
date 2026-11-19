@@ -37,7 +37,7 @@ una rama y un deploy de vista previa. Al terminar, actualiza la bitácora.
 | --- | --- | --- |
 | Titular | Hernán Zaror ("Don Hernán") | Confirmado |
 | Dominio | mistergas.cl | Confirmado |
-| Código | Carpeta local `web casafugas`, repositorio en GitHub y proyecto `casafugas` en Vercel (el nombre viene de la marca anterior) | Confirmado |
+| Código | Carpeta local `Web Cazafugas`, repositorio GitHub `cristiansanchez1003-blip/Cazafugas` y proyecto `cazafugas` en Vercel (el nombre viene de la marca anterior). Rama de producción: `main` | Confirmado (19 nov, Claude Code) |
 | Marca visible | El logo dice **Mister Gas**; título, alt, pie y copyright dicen **Cazafugas**, el nombre anterior. Don Hernán cambió el nombre después de la web | Unificar a **Mister Gas** (confirmar la escritura exacta con él) |
 | Teléfono | +56 9 8303 0716 (pie y WhatsApp de los modales) | Por confirmar que es el que contesta y que es su WhatsApp |
 | Comunas | Puente Alto, La Florida, Macul, San José de Maipo, Pirque | Confirmado |
@@ -52,12 +52,12 @@ una rama y un deploy de vista previa. Al terminar, actualiza la bitácora.
 
 ## 4. Reconocimiento inicial (lo primero que hace Claude Code)
 
-- [ ] Confirmar stack: versión de Astro, Tailwind (v3 o v4), `@astrojs/vercel` y modo (`server` o `hybrid`). El sitio usa un endpoint `POST /api/contact` que devuelve `{ url }` con un enlace de WhatsApp.
-- [ ] Ubicar los componentes: encabezado, hero (`#inicio`), contacto (`#contacto`), servicios (`#servicios`, con `servicesData` y modal), certificaciones, preguntas frecuentes, pie.
-- [ ] Buscar todos los teléfonos y enlaces: `grep -rn "tel:\|wa.me\|56912345678\|56983030716" src/`.
-- [ ] Correr Lighthouse móvil y guardar los resultados en la bitácora como línea base.
-- [ ] Confirmar que el repo de GitHub está conectado al proyecto `casafugas` de Vercel y que `mistergas.cl` es su dominio de producción. Los commits a la rama principal se publican solos: trabajar siempre en una rama aparte.
-- [ ] Buscar todas las apariciones de la marca anterior: `grep -rni "cazafugas" src/ public/`. No renombrar la carpeta, el repo ni el proyecto de Vercel: no hace falta y puede romper el despliegue.
+- [x] Confirmar stack: versión de Astro, Tailwind (v3 o v4), `@astrojs/vercel` y modo (`server` o `hybrid`). El sitio usa un endpoint `POST /api/contact` que devuelve `{ url }` con un enlace de WhatsApp.
+- [x] Ubicar los componentes: encabezado, hero (`#inicio`), contacto (`#contacto`), servicios (`#servicios`, con `servicesData` y modal), certificaciones, preguntas frecuentes, pie.
+- [x] Buscar todos los teléfonos y enlaces: `grep -rn "tel:\|wa.me\|56912345678\|56983030716" src/`.
+- [x] Correr Lighthouse móvil y guardar los resultados en la bitácora como línea base.
+- [x] Confirmar que el repo de GitHub está conectado al proyecto `casafugas` de Vercel y que `mistergas.cl` es su dominio de producción. Los commits a la rama principal se publican solos: trabajar siempre en una rama aparte.
+- [x] Buscar todas las apariciones de la marca anterior: `grep -rni "cazafugas" src/ public/`. No renombrar la carpeta, el repo ni el proyecto de Vercel: no hace falta y puede romper el despliegue.
 
 ---
 
@@ -96,7 +96,7 @@ una rama y un deploy de vista previa. Al terminar, actualiza la bitácora.
 
 ### Fase 0 · Hoy, 19 de noviembre (primeros avances prometidos a Don Hernán)
 
-- [ ] **0.1 Configuración central.** Crear `src/config/business.ts` y reemplazar todos los teléfonos, comunas y textos repetidos por este archivo:
+- [x] **0.1 Configuración central.** Crear `src/config/business.ts` y reemplazar todos los teléfonos, comunas y textos repetidos por este archivo:
 
 ```ts
 // src/config/business.ts
@@ -123,11 +123,11 @@ export const waLink = (text = 'Hola, necesito un gasfiter. Mi comuna es: ') =>
 export const telLink = () => `tel:${BUSINESS.phoneE164}`;
 ```
 
-- [ ] **0.2 Encabezado:** `href` del botón "Llamar ahora" = `telLink()`. En escritorio, mostrar también el número en texto.
-- [ ] **0.3 Hero:** "Urgencia WhatsApp" → `waLink()` con `target="_blank" rel="noopener"`. "Asesoría técnica" → "Llamar ahora" con `telLink()`. En móvil, el botón de llamar va primero.
-- [ ] **0.4 Pirque:** agregarlo a la meta descripción, al subtítulo del hero y al `<select>` del formulario (desde `BUSINESS.communes`). Corregir "San Jose" a "San José".
-- [ ] **0.5 Ortografía:** revisar todos los textos y poner las tildes que faltan. Listado mínimo: Detección, Gasfitería, Rápida, Atención, técnico(s), Teléfono, Descripción, Pérez, cotización, intervención, Diagnóstico, mantención, localización, reparación, Instalación, Cómo, detección, Qué, técnico, Cuál.
-- [ ] **0.6 `robots.txt`** en `public/`:
+- [x] **0.2 Encabezado:** `href` del botón "Llamar ahora" = `telLink()`. En escritorio, mostrar también el número en texto.
+- [x] **0.3 Hero:** "Urgencia WhatsApp" → `waLink()` con `target="_blank" rel="noopener"`. "Asesoría técnica" → "Llamar ahora" con `telLink()`. En móvil, el botón de llamar va primero.
+- [x] **0.4 Pirque:** agregarlo a la meta descripción, al subtítulo del hero y al `<select>` del formulario (desde `BUSINESS.communes`). Corregir "San Jose" a "San José".
+- [x] **0.5 Ortografía:** revisar todos los textos y poner las tildes que faltan. Listado mínimo: Detección, Gasfitería, Rápida, Atención, técnico(s), Teléfono, Descripción, Pérez, cotización, intervención, Diagnóstico, mantención, localización, reparación, Instalación, Cómo, detección, Qué, técnico, Cuál.
+- [x] **0.6 `robots.txt`** en `public/`:
 
 ```
 User-agent: *
@@ -142,8 +142,8 @@ Allow: /
 Sitemap: https://mistergas.cl/sitemap-index.xml
 ```
 
-- [ ] **0.7 Sitemap:** instalar `@astrojs/sitemap`, `site: 'https://mistergas.cl'` en `astro.config`.
-- [ ] **0.8 `<head>`:** canonical, Open Graph y Twitter. Título y descripción nuevos:
+- [x] **0.7 Sitemap:** instalar `@astrojs/sitemap`, `site: 'https://mistergas.cl'` en `astro.config`.
+- [x] **0.8 `<head>`:** canonical, Open Graph y Twitter. Título y descripción nuevos:
   - Título: `Detección de Fugas y Gasfiter en Puente Alto y La Florida | [MARCA]`
   - Descripción: `Detección de fugas sin romper, gasfitería y calefones en Puente Alto, La Florida, Macul, San José de Maipo y Pirque. Técnico SEC. Lunes a viernes de 9 a 18.`
   - `og:image`: 1200 × 630 con logo, servicio y comunas (crear en `public/og.jpg`).
@@ -304,6 +304,7 @@ Agregar una fila por sesión, la más reciente arriba.
 
 | Fecha | Quién | Qué se hizo | Próximo paso |
 | --- | --- | --- | --- |
+| 19 nov 2026 | Claude Code | **Reconocimiento:** Astro 6.4.2 (`output: server`, portada prerenderizada y `/api/contact` serverless), Tailwind 3.4.19 con `@astrojs/tailwind` (tokens de la Fase 2 en `theme.extend`), `@astrojs/vercel` 10.0.8. Vercel `cazafugas` conectado a GitHub, producción = `main` → `mistergas.cl`; vistas previas protegidas con login de Vercel. Hallazgos extra: el menú enlaza a `#sectores`, que no existe; `favicon-mister-gas.png` pesa 1,2 MB y es el mismo archivo que el logo; `npm install` necesita `--legacy-peer-deps` (`@astrojs/tailwind` aún no declara Astro 6). **Línea base Lighthouse móvil (mistergas.cl):** rendimiento 45 · accesibilidad 100 · buenas prácticas 100 · SEO 100; LCP 10,6 s, FCP 3,7 s, TBT 700 ms, CLS 0; 1.863 KiB. En build local, `main` y la rama dan lo mismo (65–68 · 100 · 100 · 100; LCP ~17 s por el logo de 1,2 MB). **Fase 0 completa (0.1 a 0.8)** en la rama `fase-0-mistergas`, un commit por tarea. Vista previa lista: https://cazafugas-git-fase-0-93d9f5-cristiansanchez1003-blips-projects.vercel.app. Verificado: ningún `56912345678` en el código; todos los `tel:` y `wa.me` usan +56 9 8303 0716; `/robots.txt` y `/sitemap-index.xml` dan 200 en el build; título, descripción, canonical y OG correctos. El `og:image` apunta a `mistergas.cl/og.jpg`, que existirá al publicar. Los mensajes de WhatsApp ahora dicen "Hola Mister Gas" | Cristian: abrir la vista previa en su celular y probar los 3 botones; confirmar con Don Hernán la marca y el teléfono; aprobar y unir `fase-0-mistergas` a `main` (eso publica). Después, Fase 1 |
 | 19 nov 2026 | Cristian | Confirmó dónde está el código: carpeta `web casafugas`, GitHub y Vercel (`casafugas`). La marca vigente es Mister Gas; Cazafugas era el nombre anterior | Abrir Claude Code en esa carpeta con este plan |
 | 19 nov 2026 | Claude (chat) | Auditoría completa de la web publicada (escritorio y móvil) y este plan | Reconocimiento del repo y Fase 0 en Claude Code |
 | 19 nov 2026 | Cristian | Avisó a Don Hernán que hoy parte el proyecto y llegan los primeros avances | Cobro de $50.000, boleta y llamada de Google Ads |
