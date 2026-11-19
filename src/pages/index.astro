@@ -7,6 +7,7 @@ import Services from '@components/Services.astro';
 import TrustBand from '@components/TrustBand.astro';
 import FAQ from '@components/FAQ.astro';
 import HowWeWork from '@components/HowWeWork.astro';
+import Communes from '@components/Communes.astro';
 import Footer from '@components/Footer.astro';
 import MobileCtaBar from '@components/MobileCtaBar.astro';
 import { BUSINESS, communesText } from '@config/business';
@@ -22,11 +23,13 @@ const description = `Detección de fugas sin romper, gasfitería y calefones en 
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqJsonLd())} />
   <Header />
   <main>
+    <!-- Orden de secciones: PLAN-MAESTRO 2.5 -->
     <Hero />
-    <ContactForm />
-    <Services />
     <TrustBand />
+    <Services />
     <HowWeWork />
+    <Communes />
+    <ContactForm />
     <FAQ />
   </main>
   <Footer />
