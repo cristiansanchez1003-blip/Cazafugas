@@ -55,8 +55,11 @@ async function getPayload(request: Request): Promise<ContactPayload> {
   };
 }
 
+// La descripción del problema es opcional (PLAN-MAESTRO 2.3).
+const requiredFields: Array<keyof ContactPayload> = ['name', 'phone', 'commune'];
+
 function validate(payload: ContactPayload): string[] {
-  return (Object.keys(payload) as Array<keyof ContactPayload>)
+  return requiredFields
     .filter((field) => payload[field].length === 0)
     .map((field) => `El campo ${fieldLabels[field]} es obligatorio.`);
 }
@@ -69,7 +72,8 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse({ error: 'Faltan datos obligatorios.', errors }, 400);
   }
 
-  const message = `Hola ${BUSINESS.name}. Soy ${payload.name}, estoy en ${payload.commune}. Mi problema es: ${payload.problem}. Mi teléfono es ${payload.phone}.`;
+  const problem = payload.problem ? ` Mi problema es: ${payload.problem}.` : '';
+  const message = `Hola ${BUSINESS.name}. Soy ${payload.name}, estoy en ${payload.commune}.${problem} Mi teléfono es ${payload.phone}.`;
   const url = waLink(message);
 
   return jsonResponse({ url });
