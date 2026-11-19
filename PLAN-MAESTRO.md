@@ -152,8 +152,8 @@ Sitemap: https://mistergas.cl/sitemap-index.xml
 
 ### Fase 1 · Antes de encender la campaña (1 a 3 días hábiles)
 
-- [ ] **1.1 GTM + GA4.** Snippet de GTM en `<head>` y `<noscript>` al inicio de `<body>` (ID `GTM-XXXXXXX`, pendiente). GA4 se configura dentro de GTM, no en el código.
-- [ ] **1.2 Capa de datos.** Script global que empuja los eventos:
+- [x] **1.1 GTM + GA4.** Snippet de GTM en `<head>` y `<noscript>` al inicio de `<body>` (ID `GTM-XXXXXXX`, pendiente). GA4 se configura dentro de GTM, no en el código.
+- [x] **1.2 Capa de datos.** Script global que empuja los eventos:
 
 ```html
 <script is:inline>
@@ -172,7 +172,7 @@ Sitemap: https://mistergas.cl/sitemap-index.xml
 ```
 
   Cada enlace lleva `data-cta` = `header`, `hero`, `barra_movil`, `modal`, `contacto` o `footer`, y los del modal llevan `data-service`.
-- [ ] **1.3 `generate_lead`.** En el script del formulario, cuando `/api/contact` responde OK, empujar el evento y redirigir al terminar o a los 800 ms:
+- [x] **1.3 `generate_lead`.** En el script del formulario, cuando `/api/contact` responde OK, empujar el evento y redirigir al terminar o a los 800 ms:
 
 ```js
 let done = false;
@@ -203,11 +203,11 @@ setTimeout(go, 900);
   | Etiqueta · Seguimiento de conversiones de Google Ads | `Ads - Llamada (clic)`, `Ads - WhatsApp`, `Ads - Formulario` | ID y etiqueta de cada conversión creada en Ads; activadores `CE - tel_click`, `CE - whatsapp_click`, `CE - generate_lead` |
 
   En GA4: marcar `tel_click`, `whatsapp_click` y `generate_lead` como eventos clave y registrar `cta_location`, `service` y `commune` como dimensiones personalizadas (alcance de evento). Para encender GTM en el sitio, poner el ID en `src/config/analytics.ts` (`GTM_ID`); mientras esté vacío, el snippet no se carga. Valores de `cta_location` en uso: `header`, `hero`, `barra_movil`, `modal`, `footer` (el bloque de contacto no tiene enlaces `tel:` ni `wa.me`; su conversión es `generate_lead`).
-- [ ] **1.5 Barra fija en móvil:** componente `MobileCtaBar.astro`, visible bajo 768 px, fija abajo, 56 px de alto, dos botones a lo ancho: "Llamar" (rojo de la marca) y "WhatsApp" (verde), con `data-cta="barra_movil"`. Agregar `padding-bottom` al `<body>` en móvil para que no tape el pie. Respetar `env(safe-area-inset-bottom)`.
-- [ ] **1.6 Logo:** exportar a WebP o AVIF a 2× del tamaño mostrado (unos 200 × 224 px, meta < 20 KB). Usar `<Image>` de Astro con `width` y `height`. Las copias decorativas de las tarjetas: `loading="lazy"` y tamaño real.
-- [ ] **1.7 Favicon:** `favicon.ico` 32 px, `apple-touch-icon.png` 180 px e `icon.svg` si hay versión vectorial.
-- [ ] **1.8 Hero:** solo la primera imagen del carrusel con `eager` + `fetchpriority="high"`; las otras dos `lazy`. El sello SEC oculto en móvil, `lazy`.
-- [ ] **1.9 JSON-LD** en el layout (completar los TODO antes de publicar):
+- [x] **1.5 Barra fija en móvil:** componente `MobileCtaBar.astro`, visible bajo 768 px, fija abajo, 56 px de alto, dos botones a lo ancho: "Llamar" (rojo de la marca) y "WhatsApp" (verde), con `data-cta="barra_movil"`. Agregar `padding-bottom` al `<body>` en móvil para que no tape el pie. Respetar `env(safe-area-inset-bottom)`.
+- [x] **1.6 Logo:** exportar a WebP o AVIF a 2× del tamaño mostrado (unos 200 × 224 px, meta < 20 KB). Usar `<Image>` de Astro con `width` y `height`. Las copias decorativas de las tarjetas: `loading="lazy"` y tamaño real.
+- [x] **1.7 Favicon:** `favicon.ico` 32 px, `apple-touch-icon.png` 180 px e `icon.svg` si hay versión vectorial.
+- [x] **1.8 Hero:** solo la primera imagen del carrusel con `eager` + `fetchpriority="high"`; las otras dos `lazy`. El sello SEC oculto en móvil, `lazy`.
+- [x] **1.9 JSON-LD** en el layout (completar los TODO antes de publicar):
 
 ```html
 <script type="application/ld+json" set:html={JSON.stringify({
@@ -238,9 +238,9 @@ setTimeout(go, 900);
 ```
 
   Más un `FAQPage` generado desde el mismo arreglo de preguntas frecuentes que se muestra en la página. Validar en https://search.google.com/test/rich-results y en https://validator.schema.org.
-- [ ] **1.10 Calefón:** agregar "Instalación" al servicio de calefones (tarjeta, modal y JSON-LD).
-- [ ] **1.11 Marca unificada a Mister Gas:** título, `alt`, textos, pie, copyright, JSON-LD y Open Graph. Renombrar `logotipo-cazafugas.png` al optimizarlo (por ejemplo, `logo-mister-gas.webp`).
-- [ ] **1.12 `data-reveal` seguro:** que el contenido sea visible si JavaScript no corre (clase `js` en `<html>` puesta por un script inline; las animaciones solo aplican con `.js`).
+- [x] **1.10 Calefón:** agregar "Instalación" al servicio de calefones (tarjeta, modal y JSON-LD).
+- [x] **1.11 Marca unificada a Mister Gas:** título, `alt`, textos, pie, copyright, JSON-LD y Open Graph. Renombrar `logotipo-cazafugas.png` al optimizarlo (por ejemplo, `logo-mister-gas.webp`).
+- [x] **1.12 `data-reveal` seguro:** que el contenido sea visible si JavaScript no corre (clase `js` en `<html>` puesta por un script inline; las animaciones solo aplican con `.js`).
 
 **Criterio de cierre de la fase 1:** Tag Assistant muestra los tres eventos con `cta_location` correcto; DebugView de GA4 los recibe; JSON-LD sin errores; Lighthouse móvil igual o mejor que la línea base; logo < 20 KB.
 
@@ -319,6 +319,7 @@ Agregar una fila por sesión, la más reciente arriba.
 
 | Fecha | Quién | Qué se hizo | Próximo paso |
 | --- | --- | --- | --- |
+| 19 nov 2026 | Claude Code | **Fase 1 en la rama `fase-1-mistergas`** (sale de `fase-0-mistergas`), un commit por tarea. Vista previa lista (commit `beb23ba`): https://cazafugas-git-fase-1-b3a9da-cristiansanchez1003-blips-projects.vercel.app. 1.1 GTM listo en el código pero apagado: se enciende poniendo el ID en `src/config/analytics.ts`; con `GTM-XXXXXXX` de relleno la página pediría un contenedor inexistente. 1.2 y 1.3 probados en el navegador: llegan `tel_click` y `whatsapp_click` con `cta_location` correcto (header, hero, barra_movil, modal, footer), `service` en el modal, `service_modal_open`, `form_start` (una vez) y `generate_lead` con la comuna y la redirección. 1.4 queda documentada en la tarea (la configuración de GTM se hace en su interfaz). 1.5 barra móvil (verde `green-700` por contraste; se agregó `viewport-fit=cover` para que funcione `safe-area-inset-bottom`). 1.6 logo WebP: 18,7 KB en el encabezado (antes 1,2 MB × 7). 1.7 `favicon.ico` 16/32/48 y `apple-touch-icon` con el logo completo; no hay versión vectorial, así que no hay `icon.svg`. 1.9 JSON-LD `Plumber` + `FAQPage` (preguntas en `src/data/faq.ts`), validado contra el vocabulario de schema.org; el logo del JSON-LD usa la URL que genera Astro. 1.10 instalación de calefones. 1.11 marca Mister Gas; se borró `logotipo-cazafugas.jpeg`. 1.12 `data-reveal` seguro. **Corrección de rendimiento:** con 1.12 el hero nacía oculto y el FCP subía de ~3 s a 6,5-9 s; se le quitó la animación al hero (visible desde el primer cuadro). **Lighthouse móvil, build local, 3 corridas alternadas** (la máquina estaba cargada, por eso varía): Fase 0 = 29/46/69 · LCP ~17 s · 3.108 KiB; Fase 1 = 48/51/76 · LCP 3,8-4,5 s · 661 KiB; accesibilidad, buenas prácticas y SEO en 100 en ambas. **Pendiente:** dirección o comuna base (Google pide `address` en negocios locales para resultados enriquecidos), `sameAs` con la ficha de Google, ID de GTM, Tag Assistant y DebugView (necesitan GTM encendido), Rich Results Test con la URL publicada | Cristian: revisar la vista previa de `fase-1-mistergas` en el celular; crear GTM y GA4 y pasarme el ID; confirmar con Don Hernán marca, teléfono, pago y si muestra comuna base. Unir primero `fase-0-mistergas` y luego `fase-1-mistergas` a `main` |
 | 19 nov 2026 | Claude Code | **Reconocimiento:** Astro 6.4.2 (`output: server`, portada prerenderizada y `/api/contact` serverless), Tailwind 3.4.19 con `@astrojs/tailwind` (tokens de la Fase 2 en `theme.extend`), `@astrojs/vercel` 10.0.8. Vercel `cazafugas` conectado a GitHub, producción = `main` → `mistergas.cl`; vistas previas protegidas con login de Vercel. Hallazgos extra: el menú enlaza a `#sectores`, que no existe; `favicon-mister-gas.png` pesa 1,2 MB y es el mismo archivo que el logo; `npm install` necesita `--legacy-peer-deps` (`@astrojs/tailwind` aún no declara Astro 6). **Línea base Lighthouse móvil (mistergas.cl):** rendimiento 45 · accesibilidad 100 · buenas prácticas 100 · SEO 100; LCP 10,6 s, FCP 3,7 s, TBT 700 ms, CLS 0; 1.863 KiB. En build local, `main` y la rama dan lo mismo (65–68 · 100 · 100 · 100; LCP ~17 s por el logo de 1,2 MB). **Fase 0 completa (0.1 a 0.8)** en la rama `fase-0-mistergas`, un commit por tarea. Vista previa lista: https://cazafugas-git-fase-0-93d9f5-cristiansanchez1003-blips-projects.vercel.app. Verificado: ningún `56912345678` en el código; todos los `tel:` y `wa.me` usan +56 9 8303 0716; `/robots.txt` y `/sitemap-index.xml` dan 200 en el build; título, descripción, canonical y OG correctos. El `og:image` apunta a `mistergas.cl/og.jpg`, que existirá al publicar. Los mensajes de WhatsApp ahora dicen "Hola Mister Gas" | Cristian: abrir la vista previa en su celular y probar los 3 botones; confirmar con Don Hernán la marca y el teléfono; aprobar y unir `fase-0-mistergas` a `main` (eso publica). Después, Fase 1 |
 | 19 nov 2026 | Cristian | Confirmó dónde está el código: carpeta `web casafugas`, GitHub y Vercel (`casafugas`). La marca vigente es Mister Gas; Cazafugas era el nombre anterior | Abrir Claude Code en esa carpeta con este plan |
 | 19 nov 2026 | Claude (chat) | Auditoría completa de la web publicada (escritorio y móvil) y este plan | Reconocimiento del repo y Fase 0 en Claude Code |
