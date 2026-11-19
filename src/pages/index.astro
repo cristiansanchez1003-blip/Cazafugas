@@ -7,15 +7,15 @@ import Services from '@components/Services.astro';
 import TrustBand from '@components/TrustBand.astro';
 import FAQ from '@components/FAQ.astro';
 import Footer from '@components/Footer.astro';
-import { communesText } from '@config/business';
+import { BUSINESS, communesText } from '@config/business';
 
 export const prerender = true;
+
+const title = `Detección de Fugas y Gasfiter en Puente Alto y La Florida | ${BUSINESS.name}`;
+const description = `Detección de fugas sin romper, gasfitería y calefones en ${communesText()}. Técnico SEC. Lunes a viernes de 9 a 18.`;
 ---
 
-<BaseLayout
-  title="Cazafugas | Detección de Fugas y Gasfitería Certificada"
-  description={`Servicio profesional de detección de fugas, gasfitería y reparaciones certificadas en ${communesText()}.`}
->
+<BaseLayout title={title} description={description}>
   <Header />
   <main>
     <Hero />
