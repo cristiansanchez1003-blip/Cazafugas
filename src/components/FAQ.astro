@@ -2,9 +2,9 @@
 import { FAQ } from '../data/faq';
 ---
 
-<section id="preguntas" class="bg-brand-surface px-5 py-20 md:px-8 md:py-28">
+<section id="preguntas" class="bg-brand-surface px-5 py-section md:px-8">
   <div class="mx-auto max-w-3xl">
-    <h2 data-reveal class="text-center text-4xl font-black leading-tight text-brand-navy md:text-5xl">Preguntas Frecuentes</h2>
+    <h2 data-reveal class="text-center text-h2 font-black text-brand-navy">Preguntas Frecuentes</h2>
     <div class="mt-14 space-y-4">
       {
         FAQ.map((item) => (
@@ -13,7 +13,7 @@ import { FAQ } from '../data/faq';
               {item.question}
               <span class="text-xl text-slate-500 transition group-open:rotate-180" aria-hidden="true">⌄</span>
             </summary>
-            <p class="mt-4 text-sm leading-relaxed text-slate-500">{item.answer}</p>
+            <p class="mt-4 text-body text-slate-600">{item.answer}</p>
           </details>
         ))
       }

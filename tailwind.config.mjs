@@ -15,6 +15,24 @@ export default {
           surface: '#f9f9f9'
         }
       },
+      // Proporción áurea (PLAN-MAESTRO 2.1). Los tamaños viven en variables CSS
+      // (src/styles/global.css) para cambiar de escala móvil (×√φ) a escritorio (×φ).
+      fontSize: {
+        body: ['var(--text-body)', { lineHeight: '1.6' }],
+        lead: ['var(--text-lead)', { lineHeight: '1.6' }],
+        h3: ['var(--text-h3)', { lineHeight: '1.2' }],
+        h2: ['var(--text-h2)', { lineHeight: '1.15' }],
+        h1: ['var(--text-h1)', { lineHeight: '1.08' }]
+      },
+      spacing: {
+        'fib-1': '0.5rem', // 8
+        'fib-2': '0.8125rem', // 13
+        'fib-3': '1.3125rem', // 21
+        'fib-4': '2.125rem', // 34
+        'fib-5': '3.4375rem', // 55
+        'fib-6': '5.5625rem', // 89
+        section: 'var(--section-y)' // 55 móvil / 89 escritorio
+      },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         heading: ['Outfit', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
