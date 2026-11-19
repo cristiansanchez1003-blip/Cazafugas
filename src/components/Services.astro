@@ -12,7 +12,8 @@ const services = [
     detail:
       '¿Tu calefón falla en el peor momento? Realizamos instalación, mantenimiento preventivo y reparación técnica certificada para equipos de todas las marcas. Aseguramos eficiencia energética y, sobre todo, máxima seguridad para tu familia.',
     cta: 'Agendar instalación o mantención',
-    image: '/images/servicios/calefones.webp'
+    image: '/images/servicios/calefones.webp',
+    alt: 'Técnico revisando el interior de un calefón abierto'
   },
   {
     id: 'fugas',
@@ -22,7 +23,8 @@ const services = [
     detail:
       'No rompas paredes innecesariamente. Utilizamos equipos de termografía y ultrasonido para localizar el origen exacto de la filtración. Diagnóstico rápido, preciso y profesional para evitar daños mayores.',
     cta: 'Solicitar detección urgente',
-    image: '/images/servicios/fugas.webp'
+    image: '/images/servicios/fugas.webp',
+    alt: 'Detector electrónico de fugas de gas junto a una cañería de gas'
   },
   {
     id: 'redes',
@@ -32,7 +34,8 @@ const services = [
     detail:
       'Diseñamos e instalamos redes de agua potable y sanitarias bajo estrictas normas de ingeniería. Garantizamos estanqueidad, durabilidad y materiales de primera calidad para tu tranquilidad.',
     cta: 'Cotizar instalación',
-    image: '/images/servicios/redes.webp'
+    image: '/images/servicios/redes.webp',
+    alt: 'Red de cañerías de agua potable con válvulas y manómetros'
   },
   {
     id: 'destapes',
@@ -42,7 +45,8 @@ const services = [
     detail:
       'Recupera el flujo normal de tus instalaciones. Usamos maquinaria de alta presión para eliminar obstrucciones profundas en alcantarillados y redes sanitarias. Servicio limpio, rápido y efectivo.',
     cta: 'Solicitar destape',
-    image: '/images/servicios/destapes.webp'
+    image: '/images/servicios/destapes.webp',
+    alt: 'Técnico destapando un alcantarillado con una máquina de cable'
   },
   {
     id: 'griferia',
@@ -52,7 +56,8 @@ const services = [
     detail:
       '¿Goteos molestos o baja presión? Reparamos y renovamos grifería y artefactos sanitarios de alta gama. Devolvemos la estética y funcionalidad a tu baño o cocina con mano de obra experta.',
     cta: 'Reparar ahora',
-    image: '/images/servicios/griferia.webp'
+    image: '/images/servicios/griferia.webp',
+    alt: 'Llave inglesa ajustando la grifería de un lavamanos'
   }
 ];
 
@@ -91,7 +96,7 @@ const servicesData = services.map((service) => ({
           >
             <img
               src={service.image}
-              alt=""
+              alt={service.alt}
               class="absolute inset-0 -z-20 h-full w-full object-cover transition duration-500 group-hover:scale-105"
               loading="lazy"
               decoding="async"
