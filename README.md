@@ -1,42 +1,30 @@
-# Cazafugas Landing
+# Mister Gas · mistergas.cl
 
-Landing page Astro + Tailwind para Cazafugas con renderizado estatico de la pagina principal y endpoint serverless para el formulario de contacto.
+Landing de Mister Gas (Don Hernán Zaror): detección de fugas, gasfitería y calefones en Puente Alto, La Florida, Macul, San José de Maipo y Pirque. Astro + Tailwind, desplegada en Vercel (proyecto `cazafugas`, nombre de la marca anterior).
+
+El plan de trabajo, las reglas y la bitácora están en [`PLAN-MAESTRO.md`](PLAN-MAESTRO.md).
 
 ## Estructura
 
 ```txt
-.
-+-- astro.config.mjs
-+-- package.json
-+-- tailwind.config.mjs
-+-- public/
-|   +-- assets/
-|       +-- logotipo-cazafugas.jpeg
-+-- src/
-    +-- components/
-    |   +-- ContactForm.astro
-    |   +-- FAQ.astro
-    |   +-- Footer.astro
-    |   +-- Header.astro
-    |   +-- Hero.astro
-    |   +-- Services.astro
-    |   +-- TrustBand.astro
-    +-- layouts/
-    |   +-- BaseLayout.astro
-    +-- pages/
-    |   +-- api/
-    |   |   +-- contact.ts
-    |   +-- index.astro
-    +-- styles/
-        +-- global.css
+src/
+  config/business.ts    Datos del negocio: teléfono, WhatsApp, comunas, horario, servicios (único lugar)
+  config/analytics.ts   ID de Google Tag Manager
+  assets/               Logo fuente (Astro genera las versiones WebP)
+  components/           Header, Hero, ContactForm, Services, TrustBand, FAQ, Footer, MobileCtaBar
+  data/faq.ts           Preguntas frecuentes (se usan en la página y en el JSON-LD)
+  layouts/BaseLayout.astro   <head>, SEO, Open Graph, JSON-LD, capa de datos
+  pages/index.astro     Portada (prerenderizada)
+  pages/api/contact.ts  POST /api/contact → { url } de WhatsApp (función serverless)
+public/                 robots.txt, og.jpg, favicon.ico, apple-touch-icon.png, imágenes
 ```
 
 ## Comandos
 
 ```bash
-npm install
+npm install --legacy-peer-deps   # @astrojs/tailwind aún no declara soporte para Astro 6
 npm run dev
 npm run build
 ```
 
-La pagina principal usa `export const prerender = true` y el endpoint `src/pages/api/contact.ts` usa `export const prerender = false`, por lo que Vercel puede servir la landing como HTML estatico y mantener `/api/contact` como funcion serverless dentro de `output: 'server'`.
+La rama `main` se publica sola en mistergas.cl. Todo cambio va en una rama aparte con su vista previa de Vercel.
