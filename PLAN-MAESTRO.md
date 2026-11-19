@@ -274,8 +274,22 @@ setTimeout(go, 900);
 - [ ] **2.5 Orden de secciones:** hero, franja de confianza (SEC, pago al final, reseñas cuando existan), servicios, cómo trabajamos, comunas, contacto, preguntas frecuentes, pie.
 - [ ] **2.6 Aviso fuera de horario:** si la hora de Santiago está fuera de lunes a viernes de 9 a 18, mostrar sobre los botones: "Escríbenos y te contactamos mañana desde las 9" (o el lunes, si es fin de semana). Usar `Intl.DateTimeFormat` con `timeZone: 'America/Santiago'`.
 - [ ] **2.7 Preguntas frecuentes:** de 3 a unas 10, con respuestas que entregue Don Hernán (precio desde, cuánto demora, si rompe o no, equipos, certificado SEC, cuánto tarda en llegar a cada comuna, formas de pago, garantía). Sin inventar respuestas.
+
+  Cuestionario para Don Hernán (las respuestas van tal cual a `src/data/faq.ts`; la página y el JSON-LD se actualizan solos):
+
+  1. ¿Desde cuánto cobra una detección de fugas? ¿Se puede publicar "desde $80.000"?
+  2. ¿Cuánto demora una detección típica? ¿Y una reparación?
+  3. ¿En qué casos hay que romper y cómo se repara después?
+  4. ¿Qué equipos usa? (confirmar ultrasonido, presión controlada y termografía)
+  5. ¿Cuál es su número o enlace de certificación SEC y qué cubre?
+  6. ¿Cuánto tarda en llegar a cada comuna (Puente Alto, La Florida, Macul, San José de Maipo, Pirque)?
+  7. ¿Qué formas de pago acepta? (confirmar efectivo, transferencia y tarjetas, al terminar)
+  8. ¿Da garantía por el trabajo? ¿Cuánto tiempo y qué cubre?
+  9. ¿Atiende urgencias el mismo día dentro del horario?
+  10. ¿Instala calefones nuevos? ¿Trae el equipo o lo compra el cliente?
+  11. ¿Trabaja los feriados que caen en día hábil (8 y 25 de diciembre, 1 de enero)? (también define el aviso fuera de horario, 2.6)
 - [ ] **2.8 Política de privacidad:** página `/privacidad` corta (qué datos pide el formulario, para qué, cómo pedir que se borren). Contexto: Ley 21.719.
-- [ ] **2.9 Microsoft Clarity** por GTM.
+- [ ] **2.9 Microsoft Clarity** por GTM. En GTM: Plantillas → Galería → "Microsoft Clarity - Official"; etiqueta con el ID del proyecto de Clarity y activador *All Pages*. En Clarity, activar el enmascaramiento de campos del formulario (modo estricto o "Mask all inputs") para no grabar nombre ni teléfono. La política de privacidad (2.8) ya menciona Clarity.
 - [ ] **2.10 `llms.txt`** en `public/` con nombre, servicios, comunas, horario y contacto (no afecta a Google, sirve para otros asistentes).
 - [ ] **2.11 Alt descriptivos** en las imágenes de servicios.
 
