@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Footer from '@components/Footer.astro';
+import MobileCtaBar from '@components/MobileCtaBar.astro';
+import { BUSINESS, telLink, waLink } from '@config/business';
+
+export const prerender = true;
+
+// Política de privacidad (PLAN-MAESTRO 2.8). Describe solo lo que el sitio hace hoy:
+// el formulario no guarda datos; arma un mensaje y abre WhatsApp. Revisar si cambia el flujo.
+const updated = '19 de noviembre de 2026';
+const title = `Política de privacidad | ${BUSINESS.name}`;
+const description = `Qué datos pide el formulario de ${BUSINESS.name}, para qué se usan y cómo pedir que se borren.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-fib-3">
+      <a href="/" class="font-heading text-lg font-extrabold text-brand-navy">{BUSINESS.name}</a>
+      <a href="/" class="text-sm font-semibold text-blue-800 underline underline-offset-4">Volver al inicio</a>
+    </div>
+  </header>
+
+  <main class="bg-white px-5 py-section">
+    <article class="mx-auto max-w-3xl text-body text-slate-700">
+      <h1 class="font-heading text-h2 font-extrabold text-brand-navy">Política de privacidad</h1>
+      <p class="mt-fib-2 text-sm text-slate-500">Última actualización: {updated}</p>
+
+      <h2 class="mt-fib-5 font-heading text-h3 font-extrabold text-brand-navy">Quién es responsable</h2>
+      <p class="mt-fib-2">
+        {BUSINESS.name}, servicio de gasfitería de Hernán Zaror, es responsable de los datos que nos entregas en este
+        sitio. Puedes escribirnos por
+        <a href={waLink('Hola, tengo una consulta sobre mis datos personales.')} data-cta="privacidad" target="_blank" rel="noopener" class="font-semibold text-blue-800 underline underline-offset-2">WhatsApp</a>
+        o llamarnos al
+        <a href={telLink()} data-cta="privacidad" class="font-semibold text-blue-800 underline underline-offset-2">{BUSINESS.phoneDisplay}</a>.
+      </p>
+
+      <h2 class="mt-fib-5 font-heading text-h3 font-extrabold text-brand-navy">Qué datos pide el formulario</h2>
+      <ul class="mt-fib-2 list-disc space-y-fib-1 pl-6">
+        <li>Nombre.</li>
+        <li>Teléfono.</li>
+        <li>Comuna.</li>
+        <li>Descripción del problema (opcional).</li>
+      </ul>
+
+      <h2 class="mt-fib-5 font-heading text-h3 font-extrabold text-brand-navy">Para qué los usamos</h2>
+      <p class="mt-fib-2">
+        Solo para responder tu consulta, coordinar la visita y hacer el seguimiento del trabajo. No los vendemos, no los
+        cedemos a terceros y no los usamos para enviarte publicidad.
+      </p>
+
+      <h2 class="mt-fib-5 font-heading text-h3 font-extrabold text-brand-navy">Cómo funciona el formulario</h2>
+      <p class="mt-fib-2">
+        Este sitio no guarda tus datos. Al presionar "Enviar por WhatsApp", el formulario arma un mensaje con lo que
+        escribiste y abre WhatsApp en tu dispositivo. Los datos nos llegan solo si tú envías ese mensaje. Desde ahí, la
+        conversación queda en WhatsApp, un servicio de Meta que tiene sus propias condiciones de privacidad.
+      </p>
+
+      <h2 class="mt-fib-5 font-heading text-h3 font-extrabold text-brand-navy">Medición del sitio</h2>
+      <p class="mt-fib-2">
+        Para saber cuántas personas visitan el sitio y qué botones usan, podemos usar Google Analytics y Microsoft Clarity
+        mediante Google Tag Manager. Estas herramientas usan cookies y registran datos de navegación de forma agregada
+        (por ejemplo, páginas vistas o clics en "Llamar"). No reciben el contenido del formulario. Puedes bloquear las
+        cookies desde la configuración de tu navegador.
+      </p>
+
+      <h2 class="mt-fib-5 font-heading text-h3 font-extrabold text-brand-navy">Tus derechos</h2>
+      <p class="mt-fib-2">
+        Conforme a la Ley N° 19.628 sobre protección de la vida privada, modificada por la Ley N° 21.719, puedes pedir
+        acceder a tus datos, corregirlos, que se borren, oponerte a su uso, recibirlos en un formato portable o que se
+        bloquee su tratamiento.
+      </p>
+
+      <h2 class="mt-fib-5 font-heading text-h3 font-extrabold text-brand-navy">Cómo pedir que se borren</h2>
+      <p class="mt-fib-2">
+        Escríbenos por WhatsApp o llámanos al {BUSINESS.phoneDisplay} indicando tu nombre y el número desde el que nos
+        contactaste. Eliminaremos tus mensajes y datos de contacto y te confirmaremos cuando esté hecho.
+      </p>
+    </article>
+  </main>
+
+  <Footer />
+  <MobileCtaBar />
+</BaseLayout>
