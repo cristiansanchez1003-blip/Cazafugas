@@ -1,0 +1,37 @@
+---
+// Casos con foto de antes y después (PLAN-MAESTRO 3.4). No se muestra nada mientras CASES esté vacío.
+import { Image } from 'astro:assets';
+import { CASES } from '../data/cases';
+---
+
+{
+  CASES.length > 0 && (
+    <section id="casos" class="w-full max-w-full overflow-x-hidden bg-brand-surface px-4 py-section sm:px-6 md:px-8">
+      <div class="mx-auto max-w-6xl">
+        <h2 data-reveal class="text-center font-heading text-h2 font-extrabold text-brand-navy">Trabajos realizados</h2>
+        <div class="mt-fib-4 space-y-fib-5">
+          {CASES.map((item) => (
+            <article data-reveal class="grid grid-cols-1 gap-fib-3 md:grid-cols-[1.618fr_1fr] md:items-center">
+              <div class="grid grid-cols-2 gap-fib-2">
+                <figure>
+                  <Image src={item.before} alt={item.beforeAlt} width={640} format="webp" loading="lazy" class="aspect-[4/3] w-full rounded-2xl object-cover" />
+                  <figcaption class="mt-2 text-center text-sm font-bold text-slate-600">Antes</figcaption>
+                </figure>
+                <figure>
+                  <Image src={item.after} alt={item.afterAlt} width={640} format="webp" loading="lazy" class="aspect-[4/3] w-full rounded-2xl object-cover" />
+                  <figcaption class="mt-2 text-center text-sm font-bold text-slate-600">Después</figcaption>
+                </figure>
+              </div>
+              <div>
+                <p class="text-xs font-black uppercase tracking-[0.14em] text-blue-700">{item.commune}</p>
+                <h3 class="mt-fib-1 font-heading text-h3 font-extrabold text-brand-navy">{item.title}</h3>
+                <p class="mt-fib-2 text-body text-slate-700"><strong>Problema:</strong> {item.problem}</p>
+                <p class="mt-fib-1 text-body text-slate-700"><strong>Solución:</strong> {item.solution}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
