@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { BUSINESS, waLink } from '@config/business';
+import { PAGE_FOR_SERVICE_ID } from '../data/services';
 import logo from '../assets/logo-mister-gas.png';
 
 const services = [
@@ -133,6 +134,12 @@ const servicesData = services.map((service) => ({
               >
                 Ver detalles
               </button>
+              <a
+                href={PAGE_FOR_SERVICE_ID[service.id]}
+                class="mt-4 inline-flex w-fit items-center gap-2 font-sans text-sm font-bold text-cyan-200 underline underline-offset-4 transition hover:text-white"
+              >
+                Más sobre este servicio <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
         ))

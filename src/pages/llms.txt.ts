@@ -3,6 +3,7 @@
 import type { APIRoute } from 'astro';
 import { BUSINESS, communesText, hoursText } from '../config/business';
 import { FAQ } from '../data/faq';
+import { SERVICE_PAGES } from '../data/services';
 
 export const prerender = true;
 
@@ -33,6 +34,7 @@ export const GET: APIRoute = () => {
     ...FAQ.flatMap((item) => [`### ${item.question}`, item.answer, '']),
     '## Páginas',
     `- [Inicio](${BUSINESS.domain}/)`,
+    ...SERVICE_PAGES.map((page) => `- [${page.name}](${BUSINESS.domain}/${page.slug}/)`),
     `- [Política de privacidad](${BUSINESS.domain}/privacidad/)`,
     '',
   ];

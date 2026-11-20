@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { BUSINESS, telLink, hoursText } from '@config/business';
+import { SERVICE_PAGES } from '../data/services';
 import logo from '../assets/logo-mister-gas.png';
 ---
 
@@ -33,9 +34,15 @@ import logo from '../assets/logo-mister-gas.png';
     <div>
       <h3 class="font-sans text-xs font-black uppercase tracking-[0.14em] text-brand-blue">Servicios</h3>
       <ul class="mt-5 space-y-3 font-sans text-sm text-gray-600">
-        <li>Detección de fugas</li>
-        <li>Gasfitería autorizada</li>
-        <li>Certificación SEC</li>
+        {
+          SERVICE_PAGES.map((page) => (
+            <li>
+              <a href={`/${page.slug}`} class="transition hover:text-brand-blue">
+                {page.name}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
 
