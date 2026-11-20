@@ -1,0 +1,46 @@
+---
+// Aviso fuera de horario (PLAN-MAESTRO 2.6). Se usa en el hero de la portada y de las páginas de servicio.
+import { BUSINESS } from '@config/business';
+---
+
+<p
+  data-after-hours
+  hidden
+  class="mt-6 max-w-full rounded-lg border border-amber-300/50 bg-amber-400/15 px-4 py-2 text-sm font-semibold text-amber-50"
+  aria-live="polite"
+>
+</p>
+
+<script is:inline define:vars={{ hours: BUSINESS.hours }}>
+  // Aviso fuera de horario (PLAN-MAESTRO 2.6). Hora de Santiago, sin importar la zona del visitante.
+  // No considera feriados: TODO(confirmar) si Don Hernán trabaja los días festivos.
+  (() => {
+    const notice = document.querySelector('[data-after-hours]');
+    if (!notice) return;
+    const parts = Object.fromEntries(
+      new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Santiago',
+        weekday: 'short',
+        hour: 'numeric',
+        minute: 'numeric',
+        hourCycle: 'h23'
+      })
+        .formatToParts(new Date())
+        .map((part) => [part.type, part.value])
+    );
+    const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts.weekday);
+    const now = Number(parts.hour) * 60 + Number(parts.minute);
+    const toMinutes = (hhmm) => Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5));
+    const open = toMinutes(hours.open);
+    const close = toMinutes(hours.close);
+    const isWeekday = day >= 1 && day <= 5;
+    if (isWeekday && now >= open && now < close) return;
+
+    let when = 'el lunes';
+    if (isWeekday && now < open) when = 'hoy';
+    else if (day >= 1 && day <= 4) when = 'mañana';
+
+    notice.textContent = `Escríbenos y te contactamos ${when} desde las ${Number(hours.open.slice(0, 2))}`;
+    notice.hidden = false;
+  })();
+</script>

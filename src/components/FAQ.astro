@@ -1,13 +1,22 @@
 ---
-import { FAQ } from '../data/faq';
+// Preguntas frecuentes. La portada usa las generales (src/data/faq.ts);
+// cada página de servicio pasa las suyas (src/data/services.ts).
+import { FAQ, type FaqItem } from '../data/faq';
+
+interface Props {
+  items?: FaqItem[];
+  title?: string;
+}
+
+const { items = FAQ, title = 'Preguntas Frecuentes' } = Astro.props;
 ---
 
 <section id="preguntas" class="bg-brand-surface px-5 py-section md:px-8">
   <div class="mx-auto max-w-3xl">
-    <h2 data-reveal class="text-center text-h2 font-black text-brand-navy">Preguntas Frecuentes</h2>
+    <h2 data-reveal class="text-center text-h2 font-black text-brand-navy">{title}</h2>
     <div class="mt-14 space-y-4">
       {
-        FAQ.map((item) => (
+        items.map((item) => (
           <details data-reveal class="group rounded-lg border border-slate-200 bg-white px-6 py-5 shadow-sm">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-black uppercase text-slate-700">
               {item.question}
