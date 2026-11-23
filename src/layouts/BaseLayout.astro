@@ -16,7 +16,7 @@ const { title, description, image = '/og.jpg' } = Astro.props;
 const site = Astro.site ?? new URL(BUSINESS.domain);
 const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image, site).href;
-const imageAlt = `${BUSINESS.name}: detección de fugas y gasfitería`;
+const imageAlt = `${BUSINESS.name}: servicio integral de gasfitería`;
 
 // JSON-LD del negocio (completar los TODO de business.ts antes de publicar).
 const schemaLogo = await getImage({ src: logoSrc, width: 400, format: 'webp', quality: 80 });
@@ -86,16 +86,27 @@ const businessJsonLd = {
     {
       GTM_ID && (
         <script is:inline define:vars={{ GTM_ID }}>
-          (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-            var f = d.getElementsByTagName(s)[0],
-              j = d.createElement(s),
-              dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-          })(window, document, 'script', 'dataLayer', GTM_ID);
+          // GTM (GA4) solo en mistergas.cl: localhost y las vistas previas de Vercel no ensucian
+          // los datos. Se carga cuando la página terminó de cargar, para no competir con el
+          // contenido visible (Fase 4, velocidad en celular). Los eventos que se empujen antes
+          // quedan en dataLayer y GTM los procesa al llegar.
+          (function (w, d, i) {
+            if (location.hostname.replace(/^www\./, '') !== 'mistergas.cl') return;
+            w.dataLayer = w.dataLayer || [];
+            w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            function load() {
+              var j = d.createElement('script');
+              j.async = true;
+              j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i;
+              d.head.appendChild(j);
+            }
+            function later() {
+              if ('requestIdleCallback' in w) w.requestIdleCallback(load, { timeout: 2500 });
+              else setTimeout(load, 1200);
+            }
+            if (d.readyState === 'complete') later();
+            else w.addEventListener('load', later, { once: true });
+          })(window, document, GTM_ID);
         </script>
       )
     }
@@ -104,12 +115,9 @@ const businessJsonLd = {
     <meta name="theme-color" content="#00236f" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Outfit:wght@700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fuentes propias (ver global.css). Outfit va en el H1, que es el elemento LCP. -->
+    <link rel="preload" href="/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
 

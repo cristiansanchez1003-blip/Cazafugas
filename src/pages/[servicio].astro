@@ -34,6 +34,11 @@ const specialties = (page.specialties ?? [])
   .map((slug) => pageBySlug(slug))
   .filter((item): item is ServicePage => Boolean(item));
 
+// Fotos de 1024 px que tienen versión de 640 px para celular (public/images/*-640.webp).
+const RESPONSIVE = ['/images/carrusel-1.webp', '/images/carrusel-2.webp', '/images/carrusel-3.webp', '/images/servicios/redes.webp'];
+const srcsetFor = (src: string) =>
+  RESPONSIVE.includes(src) ? `${src.replace('.webp', '-640.webp')} 640w, ${src} 1024w` : undefined;
+
 // Un solo bloque JSON-LD con @graph: Service, BreadcrumbList y FAQPage.
 const withoutContext = ({ '@context': _ctx, ...rest }: Record<string, unknown>) => rest;
 const jsonLd = {
@@ -49,6 +54,8 @@ const jsonLd = {
     <section id="inicio" class="relative w-full max-w-full overflow-hidden bg-slate-950 text-white">
       <img
         src={page.image}
+        srcset={srcsetFor(page.image)}
+        sizes="100vw"
         alt={page.imageAlt}
         class="absolute inset-0 h-full w-full object-cover opacity-45"
         loading="eager"
@@ -203,7 +210,7 @@ const jsonLd = {
                     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:border-blue-700 hover:shadow-ambient"
                   >
                     <img
-                      src={item.image}
+                      src={RESPONSIVE.includes(item.image) ? item.image.replace('.webp', '-640.webp') : item.image}
                       alt=""
                       width="600"
                       height="338"
