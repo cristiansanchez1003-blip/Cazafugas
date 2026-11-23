@@ -7,6 +7,15 @@ export type FaqItem = { question: string; answer: string };
 
 export const FAQ: FaqItem[] = [
   {
+    question: '¿Qué incluye el servicio integral de gasfitería?',
+    answer:
+      'Instalaciones y reparaciones de gas, agua potable y alcantarillado, además de mantención de calefones, detección de fugas, destapes y grifería. Un solo equipo se hace cargo de todo.',
+  },
+  {
+    question: '¿Hacen instalaciones de gas con declaración ante la SEC?',
+    answer: `Sí. ${BUSINESS.gasLicense}. Ejecutamos instalaciones domiciliarias, modificaciones y reparaciones, y tramitamos la declaración TC6 cuando corresponde.`,
+  },
+  {
     question: '¿Cómo funciona la detección de fugas sin romper?',
     answer:
       'Usamos equipos de ultrasonido, presión controlada y termografía para acotar el punto de filtración antes de intervenir.',

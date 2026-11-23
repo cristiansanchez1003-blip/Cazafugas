@@ -41,9 +41,11 @@ una rama y un deploy de vista previa. Al terminar, actualiza la bitácora.
 | Marca visible | El logo dice **Mister Gas**; título, alt, pie y copyright dicen **Cazafugas**, el nombre anterior. Don Hernán cambió el nombre después de la web | Unificar a **Mister Gas** (confirmar la escritura exacta con él) |
 | Teléfono | +56 9 8303 0716 (pie y WhatsApp de los modales) | Por confirmar que es el que contesta y que es su WhatsApp |
 | Comunas | Puente Alto, La Florida, Macul, San José de Maipo, Pirque | Confirmado. El 19 nov Don Hernán dijo que quiere sumar "otras comunas a convenir". **Decisión (Cristian, 20 nov):** no ampliar a ciegas, porque el presupuesto es acotado. Primero medir las solicitudes por comuna (GA4: parámetro `commune` de `generate_lead`; Google Ads: informe de ubicaciones) y decidir con datos. Por ahora el foco sigue en las comunas actuales y en las que colindan con San José de Maipo. Toda comuna nueva se agrega en `BUSINESS.communes` y en la segmentación de la campaña al mismo tiempo |
-| Prioridad de búsqueda | Según Don Hernán (19 nov): 1) servicios integrales de gasfitería; 2) detección de fugas; 3) mantención e instalación de calefón | Dictado por voz como "servicios integrales de cafetería"; se entiende "gasfitería" (confirmar). Aplicarla al orden de grupos de anuncios y presupuesto, y evaluar si el título y el H1 de la portada parten por gasfitería en vez de detección de fugas |
+| Prioridad de búsqueda | Según Don Hernán (19 y 21 nov): 1) servicio integral de gasfitería; 2) detección de fugas; 3) mantención e instalación de calefón | Confirmado por escrito el 21 nov: quiere que Mister Gas se reconozca como "servicio integral de gasfitería" y propuso ese encabezado (el dictado decía "cafetería"). Aplicado en la Fase 4 a la portada, a los servicios y al orden de la campaña |
+| Licencia de gas | Instalador de gas clase 3 (SEC). Tramita declaraciones TC6 ante la SEC cuando corresponde | Dato de Don Hernán (21 nov). Falta el número de licencia |
+| Proyectos sanitarios | Agua potable y alcantarillado según el RIDAA; planos y documentos técnicos con un constructor civil que participa en su elaboración y firma | Dato de Don Hernán (21 nov) |
 | Horario | Lunes a viernes, 09:00 a 18:00. Sin trabajos nocturnos | Confirmado |
-| Servicios | Detección de fugas de agua y gas; reparación de fugas; instalación y mantención de calefones; redes de agua potable y sanitarias; destapes; grifería | Confirmado (falta "instalación de calefón" en la web) |
+| Servicios | Servicio integral de gasfitería; instalación y reparación de gas (TC6); instalaciones de agua potable y alcantarillado; calefones; detección y reparación de fugas; destapes; grifería | Confirmado (lista ampliada por Don Hernán el 21 nov; en ese orden) |
 | Precio de referencia | Detección de fugas desde $80.000 | Por confirmar antes de publicarlo |
 | Certificación SEC | La web la menciona y muestra un QR | Por confirmar número o enlace |
 | Pago | Al terminar el trabajo, sin anticipos; efectivo, transferencia y tarjetas | Está en la web; confirmar |
@@ -302,6 +304,18 @@ setTimeout(go, 900);
 - [ ] **3.2 Páginas por comuna** solo si hay contenido real y distinto (trabajos hechos ahí, fotos). Nunca la misma página con otro nombre de comuna. **Decisión (20 nov):** no se crean todavía; no hay trabajos ni fotos por comuna. Cuando haya al menos 2 o 3 casos reales en una comuna (`src/data/cases.ts` ya guarda la comuna de cada caso), se arma esa página con esos casos.
 - [ ] **3.3 Reseñas:** mostrar reseñas reales de la ficha de Google (texto, nombre y fecha, con su permiso o vía la API de la ficha). Bloque listo: se cargan en `src/data/reviews.ts` y aparecen solos después de la franja de confianza.
 - [ ] **3.4 Casos:** 3 trabajos con foto de antes y después, con permiso del cliente final. Bloque listo: fotos en `src/assets/casos/` y datos en `src/data/cases.ts`; aparecen solos después de "Cómo trabajamos".
+
+### Fase 4 · Gasfitería integral (pedido de Don Hernán del 21 nov)
+
+Plan SEO completo en `PLAN-SEO.md` (mapa de palabras clave por página, próximos pasos y preguntas para Don Hernán).
+
+- [x] **4.1 Portada como gasfitería integral:** H1 "Mister Gas · Servicio Integral de Gasfitería", descripción con gas, agua potable, alcantarillado, calefones, fugas y destapes, título y meta descripción nuevos, servicios en su orden de prioridad (gasfitería integral como principal) y dos preguntas frecuentes nuevas.
+- [x] **4.2 `/gasfiter/` como página de gasfitería integral**, con bloque "Servicios especializados" que enlaza a todas las páginas de servicio. Se mantuvo la URL porque ya estaba indexada.
+- [x] **4.3 Páginas nuevas `/instalacion-de-gas/` y `/agua-potable-y-alcantarillado/`**, hijas de gasfitería integral (ruta de tres niveles en pantalla y en JSON-LD). Texto basado solo en lo que escribió Don Hernán; **sin "Pagas al terminar"** hasta que confirme cómo se cobran esos trabajos. JSON-LD `hasCredential` con la licencia clase 3.
+- [x] **4.4 Velocidad en celular:** fuentes propias precargadas, GTM diferido y solo en mistergas.cl, sello SEC en WebP, fotos de 640 px para celular y carrusel que carga las fotos 2 y 3 al terminar. Medición local en el bitácora.
+- [x] **4.5 Botones de llamada y WhatsApp:** auditoría automática de las 8 páginas (número, texto, `data-cta`, pestaña nueva, enlaces internos, JSON-LD). En celular los botones del inicio quedan sobre la barra fija en todas las páginas, aun con el aviso de fuera de horario; para eso el aviso pasó bajo los botones y en las páginas de servicio los botones van en dos columnas.
+- [ ] **4.6 Revisión de Don Hernán** de los textos de las dos páginas nuevas y respuestas a las preguntas de `PLAN-SEO.md` (número de licencia, tipos de gas, forma de pago en proyectos, fotos).
+- [ ] **4.7 Publicar** (unir `fase-4-mistergas` a `main`, con aprobación de Cristian) y pedir indexación de las páginas nuevas en Search Console.
 
 ---
 

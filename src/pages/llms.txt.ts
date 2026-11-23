@@ -11,7 +11,7 @@ export const GET: APIRoute = () => {
   const lines = [
     `# ${BUSINESS.name}`,
     '',
-    `> Gasfitería en ${communesText()} (Región Metropolitana, Chile): detección de fugas de agua y gas sin romper, reparación de fugas, calefones, redes sanitarias, destapes y grifería. Técnico autorizado SEC. Se paga al terminar el trabajo, sin anticipos.`,
+    `> Servicio integral de gasfitería en ${communesText()} (Región Metropolitana, Chile): instalaciones y reparaciones de gas, agua potable y alcantarillado, mantención de calefones, detección de fugas, destapes y grifería. ${BUSINESS.gasLicense}; tramita la declaración TC6 ante la SEC cuando corresponde. Proyectos sanitarios según el RIDAA, con planos firmados junto a un constructor civil.`,
     '',
     '## Servicios',
     ...BUSINESS.services.map((service) => `- ${service.name}`),
