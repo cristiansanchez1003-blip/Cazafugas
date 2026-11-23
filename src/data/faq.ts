@@ -1,7 +1,7 @@
 // src/data/faq.ts
 // Preguntas frecuentes: se muestran en FAQ.astro y generan el JSON-LD FAQPage.
 // Regla 3 del plan: solo respuestas confirmadas por Don Hernán, nada inventado.
-import { BUSINESS } from '../config/business';
+import { BUSINESS, communesText } from '../config/business';
 
 export type FaqItem = { question: string; answer: string };
 
@@ -13,7 +13,15 @@ export const FAQ: FaqItem[] = [
   },
   {
     question: '¿Hacen instalaciones de gas con declaración ante la SEC?',
-    answer: `Sí. ${BUSINESS.gasLicense}. Ejecutamos instalaciones domiciliarias, modificaciones y reparaciones, y tramitamos la declaración TC6 cuando corresponde.`,
+    answer: `Sí. ${BUSINESS.gasLicense}. Ejecutamos instalaciones domiciliarias de ${BUSINESS.gasTypes}, modificaciones y reparaciones, y tramitamos la declaración TC6 cuando corresponde.`,
+  },
+  {
+    question: '¿Cómo se paga?',
+    answer: `${BUSINESS.paymentTerms} Puedes pagar en efectivo, transferencia o tarjeta.`,
+  },
+  {
+    question: '¿Atienden fuera de sus comunas principales?',
+    answer: `Sí. Nuestras comunas principales son ${communesText()}. ${BUSINESS.extendedCoverage}`,
   },
   {
     question: '¿Cómo funciona la detección de fugas sin romper?',

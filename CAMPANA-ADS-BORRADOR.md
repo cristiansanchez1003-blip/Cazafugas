@@ -33,7 +33,7 @@ Todos los textos tienen el conteo de caracteres hecho con `contar_caracteres.py`
 | Puja | CPC manual |
 | Presupuesto diario | Unos $3.300 CLP: la propuesta aceptada del 3 nov considera $100.000 de anuncios (bitácora). Confirmar con Cristian si es mensual y si incluye IVA |
 | Redes | Sin Red de Display y sin socios de búsqueda |
-| Ubicaciones | Puente Alto, La Florida, Macul, San José de Maipo y Pirque. Opción **Presencia** (no "Presencia o interés") |
+| Ubicaciones | Puente Alto, La Florida, Macul, San José de Maipo y Pirque. Opción **Presencia** (no "Presencia o interés"). Don Hernán atiende toda la Región Metropolitana con recargo por traslado (23 nov), pero la campaña parte en las 5 comunas sin recargo para cuidar el presupuesto; ampliar solo con datos de la sección 7 |
 | Idioma | Español |
 | Horario | Recomendado: lunes a viernes, de 9:00 a 18:00, que es cuando Don Hernán atiende. Así no se pagan clics que nadie contesta. Decidirlo con él |
 | Audiencias | Ninguna; sin remarketing |
@@ -105,24 +105,24 @@ Lista de la cuenta, en frase salvo que se indique:
 Conteo entre paréntesis. 15 títulos y 4 descripciones por grupo.
 
 ### Grupo 1 · Gasfitería integral
-Títulos: Gasfiter en Puente Alto (23) · Gasfiter en La Florida (22) · Gasfitería Integral (19) · Gasfiter Certificado SEC (24) · Gasfiter a Domicilio (20) · Gas, Agua y Alcantarillado (26) · Instalador de Gas Clase 3 (25) · Declaración TC6 ante la SEC (27) · Calefones, Fugas y Destapes (27) · Pagas al Terminar (17) · Sin Anticipos (13) · Escríbenos por WhatsApp (23) · Llama Ahora a Mister Gas (24) · Lunes a Viernes de 9 a 18 (25) · Un Solo Equipo para tu Casa (27)
+Títulos: Gasfiter en Puente Alto (23) · Gasfiter en La Florida (22) · Gasfitería Integral (19) · Gasfiter Certificado SEC (24) · Gasfiter a Domicilio (20) · Gas, Agua y Alcantarillado (26) · Instalador de Gas Clase 3 (25) · Declaración TC6 ante la SEC (27) · Calefones, Fugas y Destapes (27) · Reparaciones sin Anticipo (25) · Gas Natural y Gas Licuado (25) · Escríbenos por WhatsApp (23) · Llama Ahora a Mister Gas (24) · Lunes a Viernes de 9 a 18 (25) · Un Solo Equipo para tu Casa (27)
 
 Descripciones:
 - Gas, agua potable, alcantarillado, calefones, fugas y destapes. Técnico SEC. (76)
 - Atendemos Puente Alto, La Florida, Macul, San José de Maipo y Pirque. (69)
 - Instalaciones de gas con declaración TC6 cuando corresponde. Instalador clase 3. (80)
-- Pagas al terminar el trabajo, sin anticipos. Escríbenos por WhatsApp o llámanos. (80)
+- Reparaciones: pagas al terminar, sin anticipos. Escríbenos por WhatsApp o llámanos. (83)
 
 ### Grupo 2 · Instalación de gas
-Títulos: Instalación de Gas (18) · Instalador de Gas Certificado (29) · Instalador de Gas Clase 3 (25) · Declaración TC6 ante la SEC (27) · Certificado TC6 (15) · Modificación de Gas (19) · Reparación de Gas (17) · Instalación de Gas en Casa (26) · Técnico Autorizado SEC (22) · Gasfiter en Puente Alto (23) · Gasfiter en La Florida (22) · Gasfitería Integral (19) · Escríbenos por WhatsApp (23) · Llama Ahora a Mister Gas (24) · Lunes a Viernes de 9 a 18 (25)
+Títulos: Instalación de Gas (18) · Instalador de Gas Certificado (29) · Instalador de Gas Clase 3 (25) · Declaración TC6 ante la SEC (27) · Certificado TC6 (15) · Modificación de Gas (19) · Reparación de Gas (17) · Instalación de Gas en Casa (26) · Técnico Autorizado SEC (22) · Gasfiter en Puente Alto (23) · Gas Natural y Gas Licuado (25) · Gasfitería Integral (19) · Escríbenos por WhatsApp (23) · Llama Ahora a Mister Gas (24) · Lunes a Viernes de 9 a 18 (25)
 
 Descripciones:
-- Instalaciones domiciliarias de gas, modificaciones y reparaciones con instalador SEC. (85)
+- Instalaciones de gas natural y licuado, modificaciones y reparaciones. Instalador SEC. (86)
 - Tramitamos la declaración TC6 ante la SEC cuando corresponde. Licencia clase 3. (79)
 - Atendemos Puente Alto, La Florida, Macul, San José de Maipo y Pirque. (69)
 - Gas, agua potable, alcantarillado, calefones, fugas y destapes. Técnico SEC. (76)
 
-Sin "Pagas al terminar" en este grupo, igual que en la página, hasta que Don Hernán confirme cómo cobra las instalaciones nuevas.
+Sin "Pagas al terminar" en este grupo, igual que en la página: Don Hernán confirmó el 23 nov que en instalaciones nuevas normalmente pide un anticipo para materiales, aunque no es indispensable.
 
 ### Grupo 3 · Detección de fugas
 Títulos: Detección de Fugas de Agua (26) · Detección de Fugas de Gas (25) · Fugas sin Romper (16) · Detección de Fugas SEC (22) · Ultrasonido y Termografía (25) · Ubicamos la Fuga Exacta (23) · Fuga de Agua en Puente Alto (27) · ¿Subió tu Cuenta de Agua? (25) · Humedad en Muros o Pisos (24) · Técnico Autorizado SEC (22) · Pagas al Terminar (17) · Sin Anticipos (13) · Escríbenos por WhatsApp (23) · Llama Ahora a Mister Gas (24) · Lunes a Viernes de 9 a 18 (25)
@@ -157,7 +157,9 @@ Descripciones:
 | Calefones | Todas las marcas | Instalación y mantención | `/calefones/` |
 | Destapes | Alcantarillado y cañerías | Maquinaria de alta presión | `/destapes/` |
 
-**Textos destacados:** Técnico Autorizado SEC · Instalador de Gas Clase 3 · Pagas al Terminar · Sin Anticipos · Lunes a Viernes 9 a 18 · Atención a Domicilio
+**Textos destacados:** Técnico Autorizado SEC · Instalador de Gas Clase 3 · Reparaciones sin Anticipo · Gas Natural y Licuado · Calefones Multimarca · Lunes a Viernes 9 a 18 · Atención a Domicilio
+
+"Pagas al Terminar" y "Sin Anticipos" van solo como títulos de los grupos de fugas y calefones (reparaciones y mantenciones), no a nivel de campaña, porque las instalaciones nuevas de gas y los proyectos sanitarios normalmente llevan anticipo.
 
 **Llamada:** +56 9 8303 0716, con el mismo horario de la campaña.
 

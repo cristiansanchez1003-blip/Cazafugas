@@ -73,7 +73,12 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const problem = payload.problem ? ` Mi problema es: ${payload.problem}.` : '';
-  const message = `Hola ${BUSINESS.name}. Soy ${payload.name}, estoy en ${payload.commune}.${problem} Mi teléfono es ${payload.phone}.`;
+  // Fuera de las comunas principales: el mensaje pide indicar la comuna (hay recargo por traslado).
+  // El mensaje termina en "Mi comuna es: " para que la persona la escriba antes de enviar.
+  const message =
+    payload.commune === BUSINESS.otherCommuneOption
+      ? `Hola ${BUSINESS.name}. Soy ${payload.name}.${problem} Mi teléfono es ${payload.phone}. Estoy en otra comuna de la ${BUSINESS.region}. Mi comuna es: `
+      : `Hola ${BUSINESS.name}. Soy ${payload.name}, estoy en ${payload.commune}.${problem} Mi teléfono es ${payload.phone}.`;
   const url = waLink(message);
 
   return jsonResponse({ url });

@@ -2,7 +2,9 @@
 // Páginas de servicio (PLAN-MAESTRO 3.1 y Fase 4). Cada entrada genera /<slug> con su H1,
 // proceso, preguntas propias y JSON-LD Service.
 // Regla 3: los textos usan solo lo que la web ya decía, lo confirmado en la sección 3 o lo que
-// Don Hernán escribió el 21 nov 2026 (licencia de gas clase 3, TC6, RIDAA, constructor civil).
+// Don Hernán escribió el 21 nov 2026 (licencia de gas clase 3, TC6, RIDAA, constructor civil)
+// y respondió el 23 nov 2026 (todo tipo de gas, anticipo en proyectos, calefones multimarca,
+// toda la Región Metropolitana con recargo).
 // Nada de precios, plazos ni garantías hasta que él los confirme. Que él revise estos textos.
 import { BUSINESS, communesText } from '../config/business';
 import type { FaqItem } from './faq';
@@ -23,7 +25,8 @@ export type ServicePage = {
   safety?: { title: string; text: string };
   /** Recuadro informativo (azul), por ejemplo el respaldo profesional de un servicio. */
   note?: { title: string; text: string };
-  /** Muestra "Pagas al terminar. Sin anticipos." bajo los botones. */
+  /** Muestra "Pagas al terminar. Sin anticipos." bajo los botones (reparaciones y mantenciones).
+   *  En instalaciones nuevas y proyectos va en false: ahí normalmente se pide un anticipo. */
   payOnCompletion: boolean;
   /** Página madre en la ruta de navegación (por ejemplo, gasfitería integral). */
   parent?: string;
@@ -37,17 +40,23 @@ const hours = `${BUSINESS.hours.days.toLowerCase()} de ${Number(BUSINESS.hours.o
 
 const faqCommunes: FaqItem = {
   question: '¿En qué comunas atienden?',
-  answer: `En ${communesText()}, ${hours}. No hacemos trabajos nocturnos.`,
+  answer: `En ${communesText()}, ${hours}. ${BUSINESS.extendedCoverage} No hacemos trabajos nocturnos.`,
 };
 
 const faqPayment: FaqItem = {
   question: '¿Cómo se paga?',
-  answer: 'Al terminar el trabajo, sin anticipos. Puedes pagar en efectivo, transferencia o tarjeta.',
+  answer: `${BUSINESS.paymentTerms} Puedes pagar en efectivo, transferencia o tarjeta.`,
+};
+
+const faqPaymentProjects: FaqItem = {
+  question: '¿Cómo se paga una instalación nueva?',
+  answer:
+    'Normalmente pedimos un anticipo para comprar los materiales, y lo conversamos en cada caso. Las reparaciones y mantenciones se pagan al terminar, sin anticipos. Puedes pagar en efectivo, transferencia o tarjeta.',
 };
 
 const stepPay = {
   title: 'Pagas al terminar',
-  text: 'Sin anticipos. Pagas en efectivo, transferencia o tarjeta cuando el trabajo está listo.',
+  text: 'En reparaciones y mantenciones no hay anticipos: pagas en efectivo, transferencia o tarjeta cuando el trabajo está listo.',
 };
 
 const gasSafety = {
@@ -101,6 +110,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         question: '¿Trabajan de noche o los fines de semana?',
         answer: `No. Atendemos ${hours}; no hacemos trabajos nocturnos.`,
       },
+      faqPayment,
       faqCommunes,
     ],
     waMessage: 'Hola, necesito un gasfiter. Mi comuna es: ',
@@ -111,14 +121,14 @@ export const SERVICE_PAGES: ServicePage[] = [
     name: 'Instalación y reparación de gas',
     title: `Instalación de Gas y Declaración TC6 SEC | ${BUSINESS.name}`,
     description:
-      'Instalaciones de gas domiciliarias, modificaciones y reparaciones, con declaración TC6 ante la SEC cuando corresponde. Instalador de gas clase 3.',
+      'Instalaciones de gas natural y licuado, modificaciones y reparaciones, con declaración TC6 ante la SEC cuando corresponde. Instalador de gas clase 3.',
     h1: 'Instalación de gas con declaración TC6',
     intro:
-      'Instalaciones domiciliarias de gas, modificaciones y reparaciones. Tramitamos la declaración TC6 ante la SEC cuando corresponde, con licencia de instalador clase 3.',
+      'Instalaciones domiciliarias de gas natural y gas licuado, modificaciones y reparaciones. Tramitamos la declaración TC6 ante la SEC cuando corresponde, con licencia de instalador clase 3.',
     image: '/images/servicios/fugas.webp',
     imageAlt: 'Detector electrónico revisando una cañería de gas',
     includes: [
-      'Instalaciones domiciliarias de gas',
+      'Instalaciones domiciliarias de gas natural y de gas licuado',
       'Modificaciones de instalaciones existentes',
       'Reparación de instalaciones de gas',
       'Tramitación de la declaración TC6 ante la SEC, cuando corresponde',
@@ -138,7 +148,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         text: 'Hacemos el trabajo y, cuando corresponde, presentamos la declaración TC6 ante la SEC.',
       },
     ],
-    // TODO(confirmar) con Don Hernán si en instalaciones nuevas también se paga al terminar.
+    // Instalaciones nuevas: normalmente con anticipo para materiales (Don Hernán, 23 nov 2026).
     payOnCompletion: false,
     safety: gasSafety,
     parent: 'gasfiter',
@@ -154,10 +164,20 @@ export const SERVICE_PAGES: ServicePage[] = [
           'Instalaciones domiciliarias, modificaciones y reparaciones, conforme a las atribuciones de nuestra licencia de instalador de gas clase 3 otorgada por la SEC.',
       },
       {
+        question: '¿Trabajan con gas natural y gas licuado?',
+        answer: 'Sí. Trabajamos con todo tipo de gas: gas natural y gas licuado.',
+      },
+      {
         question: '¿Por qué contratar un instalador autorizado por la SEC?',
         answer:
           'Porque una instalación de gas debe ejecutarla y declararla un instalador autorizado. Así tu instalación queda segura y en regla.',
       },
+      {
+        question: '¿Cómo puedo verificar la licencia?',
+        answer:
+          'La SEC registra la autorización de cada instalador con su RUT. Si quieres verificarla antes del trabajo, pídenos el RUT y la consultas directamente en la SEC.',
+      },
+      faqPaymentProjects,
       faqCommunes,
     ],
     waMessage: 'Hola, necesito una instalación o reparación de gas. Mi comuna es: ',
@@ -168,7 +188,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     name: 'Agua potable y alcantarillado',
     title: `Instalaciones de Agua Potable y Alcantarillado | ${BUSINESS.name}`,
     description:
-      'Redes domiciliarias de agua potable y alcantarillado, ampliaciones y proyectos sanitarios según el RIDAA, con planos firmados por constructor civil.',
+      'Redes domiciliarias de agua potable y alcantarillado, ampliaciones y proyectos sanitarios según el RIDAA, con planos firmados por constructores civiles.',
     h1: 'Instalaciones de agua potable y alcantarillado',
     intro:
       'Redes domiciliarias de agua potable y alcantarillado, modificaciones, ampliaciones y proyectos sanitarios según el reglamento RIDAA.',
@@ -195,11 +215,12 @@ export const SERVICE_PAGES: ServicePage[] = [
         text: 'Ejecutamos la instalación y preparamos los planos y documentos técnicos que el proyecto requiera.',
       },
     ],
-    // TODO(confirmar) con Don Hernán cómo se paga un proyecto sanitario.
+    // Proyectos: normalmente con anticipo para materiales (Don Hernán, 23 nov 2026).
     payOnCompletion: false,
+    // Don Hernán prefiere no nombrarlos: trabaja con más de un constructor civil (23 nov 2026).
     note: {
       title: 'Proyectos sanitarios con respaldo profesional',
-      text: 'Para los proyectos sanitarios trabajamos con un constructor civil, que participa en la elaboración y firma de los planos y documentos técnicos que exige cada caso.',
+      text: 'Para los proyectos sanitarios trabajamos con constructores civiles de confianza, que participan en la elaboración y firma de los planos y documentos técnicos que exige cada caso.',
     },
     parent: 'gasfiter',
     faq: [
@@ -211,7 +232,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         question: '¿Quién firma los planos?',
         answer:
-          'En los proyectos sanitarios trabajamos con un constructor civil, que participa en la elaboración y firma de los planos y documentos técnicos que correspondan.',
+          'En los proyectos sanitarios trabajamos con constructores civiles de confianza, que participan en la elaboración y firma de los planos y documentos técnicos que correspondan.',
       },
       {
         question: '¿Hacen ampliaciones de la red?',
@@ -221,6 +242,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         question: '¿Y si solo tengo el alcantarillado tapado?',
         answer: 'Para eso tenemos el servicio de destapes, con maquinaria de alta presión.',
       },
+      faqPaymentProjects,
       faqCommunes,
     ],
     waMessage: 'Hola, necesito una instalación de agua potable o alcantarillado. Mi comuna es: ',
@@ -233,7 +255,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     description: `Instalación, mantención y reparación de calefones de todas las marcas. Técnico autorizado SEC, ${hours}. Pagas al terminar.`,
     h1: 'Instalación, mantención y reparación de calefones',
     intro:
-      'Un calefón bien instalado y mantenido entrega agua caliente sin cortes y funciona de forma segura. Instalamos, mantenemos y reparamos calefones de todas las marcas, con técnico autorizado SEC.',
+      'Un calefón bien instalado y mantenido entrega agua caliente sin cortes y funciona de forma segura. Instalamos, mantenemos y reparamos calefones de todas las marcas, con técnico autorizado SEC y capacitado en cada una de ellas.',
     image: '/images/servicios/calefones.webp',
     imageAlt: 'Técnico revisando el interior de un calefón abierto',
     includes: [
@@ -259,7 +281,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     faq: [
       {
         question: '¿Trabajan con todas las marcas?',
-        answer: 'Sí. Mantenemos y reparamos calefones de todas las marcas.',
+        answer:
+          'Sí. Somos multimarca: instalamos, mantenemos y reparamos calefones de todas las marcas, y nos hemos capacitado en cada una de ellas.',
       },
       {
         question: '¿Instalan calefones?',
@@ -409,7 +432,10 @@ export const serviceJsonLd = (page: ServicePage) => {
       url,
       image: `${BUSINESS.domain}${page.image}`,
       provider: { '@id': `${BUSINESS.domain}/#negocio` },
-      areaServed: BUSINESS.communes.map((name) => ({ '@type': 'City', name })),
+      areaServed: [
+        ...BUSINESS.communes.map((name) => ({ '@type': 'City', name })),
+        { '@type': 'AdministrativeArea', name: BUSINESS.region },
+      ],
     },
     {
       '@context': 'https://schema.org',

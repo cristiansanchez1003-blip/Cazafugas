@@ -94,10 +94,10 @@ Medición local con GTM bloqueado en ambas versiones:
 
 ## 5. Próximos pasos de SEO
 
-### 5.1 Al publicar la Fase 4 (Cristian)
-1. Revisar la vista previa y unir `fase-4-mistergas` a `main`.
-2. En Search Console: volver a enviar `sitemap-index.xml` y pedir indexación de `/instalacion-de-gas/`, `/agua-potable-y-alcantarillado/`, `/gasfiter/` y `/`.
-3. Rich Results Test sobre `/instalacion-de-gas/` (debe mostrar rutas de exploración y preguntas frecuentes).
+### 5.1 Al publicar la Fase 4 (hecho el 23 nov)
+1. ~~Unir `fase-4-mistergas` a `main`.~~ Publicada el 23 nov.
+2. ~~Reenviar el sitemap y pedir indexación.~~ El mismo 23 nov a las 07:59, Google ya tenía indexadas `/instalacion-de-gas/` y `/agua-potable-y-alcantarillado/` ("Enviada e indexada").
+3. ~~Resultados enriquecidos.~~ La inspección de URL da "Rutas de exploración" válidas en ambas. Las preguntas frecuentes no salen como resultado enriquecido: desde 2023 Google solo las muestra para sitios de gobierno y salud. El JSON-LD `FAQPage` se mantiene, porque igual ayuda a los asistentes de IA.
 
 ### 5.2 Ficha de Google Business (la palanca más fuerte para búsquedas locales)
 - Categoría principal relacionada con gasfitería (en la ficha aparece como "Fontanero"). Como secundarias, las de instalación de gas y de calentadores de agua que la ficha ofrezca.
@@ -117,6 +117,8 @@ Guías informativas que captan búsquedas de "qué es / cuándo / cómo" y enlaz
 | Qué incluye un proyecto sanitario según el RIDAA | `/agua-potable-y-alcantarillado/` | Etapas, rol del constructor civil, cuándo se necesita proyecto |
 
 ### 5.4 Comunas
+Actualización del 23 nov: Don Hernán atiende toda la Región Metropolitana, con un pequeño recargo por traslado. El sitio ya lo dice y el formulario lo registra como "Otra comuna de la Región Metropolitana" en la dimensión `commune` de GA4. Así se mide cuánta demanda llega de fuera de las 5 comunas principales antes de gastar en Ads ahí.
+
 La decisión vigente (sección 3 del plan maestro) es no crear páginas por comuna sin casos reales y no ampliar la cobertura a ciegas. Con GA4 ya midiendo la comuna de cada formulario y Google Ads dando el informe de ubicaciones, en 4 a 6 semanas se decide:
 - qué comunas actuales merecen página propia, con 2 o 3 trabajos reales cada una;
 - si conviene sumar comunas colindantes con San José de Maipo.
@@ -128,12 +130,14 @@ La decisión vigente (sección 3 del plan maestro) es no crear páginas por comu
 
 ---
 
-## 6. Preguntas para Don Hernán
+## 6. Preguntas para Don Hernán (respondidas el 23 nov 2026)
 
-1. Número de su licencia de instalador de gas clase 3, para mostrarlo en el sitio. Hoy dice "Instalador de gas clase 3, autorizado por la SEC" sin número.
-2. Qué tipos de gas trabaja (natural, licuado o ambos), para nombrarlos en `/instalacion-de-gas/`.
-3. Si en instalaciones nuevas de gas y en proyectos sanitarios también se paga al terminar. Hoy esas dos páginas **no** dicen "Pagas al terminar".
-4. Si quiere que el sitio nombre al constructor civil o solo mencione que trabaja con uno.
-5. Fotos de trabajos de gas, agua potable y alcantarillado (antes y después), con permiso del cliente.
-6. Marcas de calefón con que trabaja más.
-7. Qué comunas "a convenir" atiende hoy, para medirlas antes de anunciarlas.
+| # | Pregunta | Respuesta de Don Hernán | Qué se hizo en el sitio |
+| --- | --- | --- | --- |
+| 1 | Número de licencia de gas clase 3 | No hay número aparte: la SEC la registra con su RUT | Se quitó el pendiente. El RUT **no** se publica; en `/instalacion-de-gas/` hay una pregunta "¿Cómo puedo verificar la licencia?" (se pide el RUT y se consulta en la SEC) |
+| 2 | Tipos de gas | Todo tipo de gas | "Gas natural y gas licuado" en la descripción, la introducción, lo que incluye y una pregunta nueva de `/instalacion-de-gas/`, en la portada y en `llms.txt` |
+| 3 | Pago en instalaciones nuevas y proyectos | Normalmente pide un anticipo para materiales, pero no es indispensable | Esas dos páginas siguen sin "Pagas al terminar" y tienen la pregunta "¿Cómo se paga una instalación nueva?". En la portada, "pagas al terminar, sin anticipos" ahora dice que es para reparaciones y mantenciones (`BUSINESS.paymentTerms`) |
+| 4 | Nombrar al constructor civil | Mejor no nombrarlo: tiene más de un amigo que le firma | "Constructores civiles de confianza", en plural y sin nombres |
+| 5 | Fotos de trabajos | Nunca ha sacado; empezará a hacerlo | Pendiente. Mandarle una guía simple para sacarlas (antes y después, con permiso del cliente) |
+| 6 | Marcas de calefón | Multimarca, se ha capacitado en todas | `/calefones/`: "multimarca… capacitado en cada una"; textos destacados de Ads |
+| 7 | Comunas fuera de las 5 | Toda la Región Metropolitana, con un pequeño recargo por combustible y TAG | Sección de comunas, pie de página, preguntas frecuentes, `llms.txt` y JSON-LD (`AdministrativeArea` Región Metropolitana). El formulario tiene la opción "Otra comuna de la Región Metropolitana (con recargo por traslado)" y el mensaje de WhatsApp termina en "Mi comuna es: " para que la persona la escriba. Las 5 comunas siguen como principales y la campaña de Ads parte solo con ellas |

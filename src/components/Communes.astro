@@ -7,6 +7,7 @@ import { BUSINESS } from '@config/business';
   <div data-reveal class="mx-auto max-w-5xl text-center">
     <p class="font-sans text-xs font-black uppercase tracking-[0.18em] text-cyan-200">Cobertura</p>
     <h2 class="mt-fib-2 font-heading text-h2 font-extrabold">Comunas donde atendemos</h2>
+    <p class="mx-auto mt-fib-3 max-w-xl font-sans text-body text-blue-100">Nuestras comunas principales:</p>
     <ul class="mt-fib-4 flex flex-wrap justify-center gap-fib-2">
       {
         BUSINESS.communes.map((commune) => (
@@ -16,7 +17,10 @@ import { BUSINESS } from '@config/business';
         ))
       }
     </ul>
-    <p class="mx-auto mt-fib-4 max-w-xl font-sans text-body text-blue-100">
+    <p class="mx-auto mt-fib-4 max-w-xl font-sans text-body font-semibold text-white">
+      {BUSINESS.extendedCoverage}
+    </p>
+    <p class="mx-auto mt-fib-3 max-w-xl font-sans text-body text-blue-100">
       {BUSINESS.hours.days} de {BUSINESS.hours.open} a {BUSINESS.hours.close} hrs. Sin trabajos nocturnos.
     </p>
   </div>

@@ -86,6 +86,7 @@ import { BUSINESS, telLink } from '@config/business';
           >
             <option value="">Seleccione comuna</option>
             {BUSINESS.communes.map((commune) => <option value={commune}>{commune}</option>)}
+            <option value={BUSINESS.otherCommuneOption}>{BUSINESS.otherCommuneOption} (con recargo por traslado)</option>
           </select>
         </div>
       </div>

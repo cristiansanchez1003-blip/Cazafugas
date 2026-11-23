@@ -29,7 +29,10 @@ const businessJsonLd = {
   logo: new URL(schemaLogo.src, site).href,
   image: new URL('/og.jpg', site).href,
   telephone: BUSINESS.phoneE164,
-  areaServed: BUSINESS.communes.map((name) => ({ '@type': 'City', name })),
+  areaServed: [
+    ...BUSINESS.communes.map((name) => ({ '@type': 'City', name })),
+    { '@type': 'AdministrativeArea', name: BUSINESS.region },
+  ],
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
