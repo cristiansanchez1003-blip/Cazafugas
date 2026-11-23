@@ -52,7 +52,7 @@ const heroImages = [
         format="webp"
         quality={80}
         alt="Personal certificado SEC"
-        class="image-high-quality mb-4 h-20 max-w-full transform-gpu rounded-full border border-white/20 p-1.5 object-contain antialiased drop-shadow-lg sm:mb-6 sm:h-28 md:hidden"
+        class="image-high-quality mb-4 h-20 w-auto max-w-full transform-gpu rounded-full border border-white/20 p-1.5 object-contain antialiased drop-shadow-lg sm:mb-6 sm:h-28 md:hidden"
         loading="eager"
         decoding="async"
       />
@@ -132,7 +132,7 @@ const heroImages = [
             format="webp"
             quality={80}
             alt="Personal certificado SEC"
-            class="image-high-quality h-56 max-w-full transform-gpu rounded-full border border-white/20 p-2 object-contain antialiased drop-shadow-lg lg:h-[15.6rem]"
+            class="image-high-quality h-56 w-auto max-w-full transform-gpu rounded-full border border-white/20 p-2 object-contain antialiased drop-shadow-lg lg:h-[15.6rem]"
             loading="lazy"
             decoding="async"
           />
@@ -154,13 +154,18 @@ const heroImages = [
 
   function startHeroCarousel() {
     heroSlides.forEach((img) => {
+      if (!img.dataset.src) return;
+      img.loading = "eager";
       if (img.dataset.srcset) img.srcset = img.dataset.srcset;
-      if (img.dataset.src) img.src = img.dataset.src;
+      img.src = img.dataset.src;
     });
     if (heroSlides.length < 2 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     setInterval(() => {
+      // Solo avanza a una foto que ya llegó; si no, se queda en la actual (nunca fondo vacío).
+      const next = (activeHeroSlide + 1) % heroSlides.length;
+      if (!heroSlides[next].complete || !heroSlides[next].naturalWidth) return;
       heroSlides[activeHeroSlide].classList.replace("opacity-100", "opacity-0");
-      activeHeroSlide = (activeHeroSlide + 1) % heroSlides.length;
+      activeHeroSlide = next;
       heroSlides[activeHeroSlide].classList.replace("opacity-0", "opacity-100");
     }, 5000);
   }
