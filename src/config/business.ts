@@ -12,14 +12,18 @@ export const BUSINESS = {
   paymentAccepted: 'Efectivo, transferencia, tarjetas', // TODO(confirmar)
   // Perfiles oficiales para el JSON-LD (sameAs). TODO: URL de la ficha de Google Business.
   sameAs: [] as string[],
+  // Orden de prioridad pedido por Don Hernán (21 nov 2026): primero la gasfitería integral.
   services: [
-    { id: 'fugas', name: 'Detección de fugas de agua y gas' },
-    { id: 'reparacion', name: 'Reparación de fugas' },
+    { id: 'gasfiteria', name: 'Servicio integral de gasfitería' },
+    { id: 'gas', name: 'Instalación y reparación de gas (declaración TC6 ante la SEC)' },
+    { id: 'sanitario', name: 'Instalaciones de agua potable y alcantarillado' },
     { id: 'calefones', name: 'Instalación y mantención de calefones' },
-    { id: 'redes', name: 'Redes de agua potable y sanitarias' },
+    { id: 'fugas', name: 'Detección de fugas de agua y gas' },
     { id: 'destapes', name: 'Destapes y limpieza de cañerías' },
     { id: 'griferia', name: 'Reparación de grifería y artefactos' },
   ],
+  // Licencia SEC de Don Hernán (dato de él, 21 nov 2026). TODO(confirmar) número de licencia.
+  gasLicense: 'Instalador de gas clase 3, autorizado por la SEC',
 } as const;
 
 export const waLink = (text = 'Hola, necesito un gasfiter. Mi comuna es: ') =>

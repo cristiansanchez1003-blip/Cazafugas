@@ -11,7 +11,7 @@ import Footer from '@components/Footer.astro';
 import MobileCtaBar from '@components/MobileCtaBar.astro';
 import { BUSINESS, telLink, waLink } from '@config/business';
 import { faqJsonLd } from '../data/faq';
-import { SERVICE_PAGES, serviceJsonLd, type ServicePage } from '../data/services';
+import { SERVICE_PAGES, breadcrumbFor, pageBySlug, serviceJsonLd, type ServicePage } from '../data/services';
 
 export const prerender = true;
 
@@ -24,7 +24,15 @@ interface Props {
 }
 
 const { page } = Astro.props;
-const others = SERVICE_PAGES.filter((other) => other.slug !== page.slug);
+// En la página madre las demás ya aparecen como "servicios especializados".
+const others = SERVICE_PAGES.filter(
+  (other) => other.slug !== page.slug && !(page.specialties ?? []).includes(other.slug)
+);
+const crumbs = breadcrumbFor(page);
+const parent = page.parent ? pageBySlug(page.parent) : undefined;
+const specialties = (page.specialties ?? [])
+  .map((slug) => pageBySlug(slug))
+  .filter((item): item is ServicePage => Boolean(item));
 
 // Un solo bloque JSON-LD con @graph: Service, BreadcrumbList y FAQPage.
 const withoutContext = ({ '@context': _ctx, ...rest }: Record<string, unknown>) => rest;
@@ -52,41 +60,57 @@ const jsonLd = {
       <div class="relative mx-auto max-w-7xl px-4 pb-fib-5 pt-[calc(var(--header-height)+2rem)] sm:px-6 md:px-8 md:pb-fib-6">
         <nav aria-label="Ruta de navegación" class="text-sm text-blue-100">
           <ol class="flex flex-wrap items-center gap-2">
-            <li><a href="/" class="underline underline-offset-4 hover:text-white">Inicio</a></li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" class="font-semibold text-white">{page.name}</li>
+            {
+              crumbs.map((crumb, index) =>
+                index < crumbs.length - 1 ? (
+                  <>
+                    <li>
+                      <a href={crumb.path} class="underline underline-offset-4 hover:text-white">{crumb.name}</a>
+                    </li>
+                    <li aria-hidden="true">/</li>
+                  </>
+                ) : (
+                  <li aria-current="page" class="font-semibold text-white">{crumb.name}</li>
+                )
+              )
+            }
           </ol>
         </nav>
 
         <h1 class="text-shadow-md mt-fib-3 max-w-3xl font-heading text-h1 font-extrabold tracking-tight">{page.h1}</h1>
         <p class="mt-fib-3 max-w-2xl text-lead font-medium text-gray-200">{page.intro}</p>
 
-        <AfterHoursNotice />
-
-        <div class="mt-6 flex w-full max-w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
+        <div class="mt-6 grid w-full max-w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:flex-row sm:gap-4">
           <a
             href={waLink(page.waMessage)}
             data-cta="hero"
             data-service={page.serviceId}
             target="_blank"
             rel="noopener"
-            class="inline-flex min-h-14 w-full items-center justify-center rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto sm:px-8"
+            class="inline-flex min-h-14 w-full items-center justify-center rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 px-3 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto sm:px-8"
           >
-            Escribir por WhatsApp
+            <span class="sm:hidden">WhatsApp</span>
+            <span class="hidden sm:inline">Escribir por WhatsApp</span>
           </a>
           <a
             href={telLink()}
             data-cta="hero"
             data-service={page.serviceId}
-            class="order-first inline-flex min-h-14 w-full items-center justify-center rounded-lg border border-white/70 bg-white/10 px-6 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-black/20 backdrop-blur-md transition hover:bg-white hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto sm:px-8 md:order-none"
+            class="order-first inline-flex min-h-14 w-full items-center justify-center rounded-lg border border-white/70 bg-white/10 px-3 py-4 font-sans text-sm font-black uppercase text-white shadow-lg shadow-black/20 backdrop-blur-md transition hover:bg-white hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto sm:px-8 md:order-none"
           >
             Llamar ahora
           </a>
         </div>
 
-        <p class="mt-4 text-sm font-bold text-emerald-100">
-          <span aria-hidden="true">✓</span> Pagas al terminar. Sin anticipos.
-        </p>
+        <AfterHoursNotice />
+
+        {
+          page.payOnCompletion && (
+            <p class="mt-4 text-sm font-bold text-emerald-100">
+              <span aria-hidden="true">✓</span> Pagas al terminar. Sin anticipos.
+            </p>
+          )
+        }
       </div>
     </section>
 
@@ -115,6 +139,27 @@ const jsonLd = {
               </div>
             )
           }
+
+          {
+            page.note && (
+              <div class="mt-fib-4 rounded-2xl border border-blue-200 bg-blue-50 p-fib-3">
+                <h3 class="font-heading text-lg font-extrabold text-brand-navy">{page.note.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-700">{page.note.text}</p>
+              </div>
+            )
+          }
+
+          {
+            parent && (
+              <p class="mt-fib-4 text-sm text-slate-600">
+                Parte de nuestro servicio de{' '}
+                <a href={`/${parent.slug}/`} class="font-semibold text-blue-800 underline underline-offset-4">
+                  {parent.name.toLowerCase()}
+                </a>
+                .
+              </p>
+            )
+          }
         </div>
 
         <div data-reveal>
@@ -141,19 +186,66 @@ const jsonLd = {
       </div>
     </section>
 
+    {
+      specialties.length > 0 && (
+        <section class="w-full max-w-full overflow-x-hidden bg-brand-surface px-4 py-section sm:px-6 md:px-8">
+          <div class="mx-auto max-w-6xl">
+            <div data-reveal class="mx-auto max-w-2xl text-center">
+              <h2 class="font-heading text-h2 font-extrabold text-brand-navy">Servicios especializados</h2>
+              <p class="mt-fib-2 text-body text-slate-600">Cada servicio tiene su propia página con el detalle de lo que hacemos.</p>
+            </div>
+            <ul class="mt-fib-4 grid grid-cols-1 gap-fib-3 sm:grid-cols-2 lg:grid-cols-3">
+              {specialties.map((item) => (
+                <li data-reveal>
+                  <a
+                    href={`/${item.slug}/`}
+                    data-service={item.serviceId}
+                    class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:border-blue-700 hover:shadow-ambient"
+                  >
+                    <img
+                      src={item.image}
+                      alt=""
+                      width="600"
+                      height="338"
+                      loading="lazy"
+                      decoding="async"
+                      class="aspect-video w-full object-cover"
+                    />
+                    <span class="flex flex-1 flex-col gap-fib-1 p-fib-3">
+                      <span class="font-heading text-h3 font-extrabold text-brand-navy group-hover:underline">{item.name}</span>
+                      <span class="text-sm leading-relaxed text-slate-600">{item.description}</span>
+                      <span class="mt-auto pt-fib-2 text-sm font-bold text-blue-800">
+                        Ver servicio <span aria-hidden="true">→</span>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
     <TrustBand />
     <ContactForm />
     <FAQ items={page.faq} title="Preguntas frecuentes" />
 
     <section class="w-full max-w-full overflow-x-hidden bg-white px-4 py-section sm:px-6 md:px-8">
       <div class="mx-auto max-w-6xl">
-        <h2 data-reveal class="text-center font-heading text-h2 font-extrabold text-brand-navy">Otros servicios</h2>
-        <ul class="mt-fib-4 grid grid-cols-1 gap-fib-3 sm:grid-cols-3">
+        {
+          others.length > 0 && (
+            <h2 data-reveal class="text-center font-heading text-h2 font-extrabold text-brand-navy">
+              Otros servicios
+            </h2>
+          )
+        }
+        <ul class="mt-fib-4 grid grid-cols-1 gap-fib-3 sm:grid-cols-2 lg:grid-cols-3">
           {
             others.map((other) => (
               <li data-reveal>
                 <a
-                  href={`/${other.slug}`}
+                  href={`/${other.slug}/`}
                   class="flex h-full items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-brand-surface p-fib-3 font-heading text-lg font-extrabold text-brand-navy transition hover:border-blue-700 hover:bg-white"
                 >
                   {other.name}

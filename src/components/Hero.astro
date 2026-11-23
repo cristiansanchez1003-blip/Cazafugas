@@ -50,19 +50,19 @@ const heroImages = [
       />
 
       <p class="mb-4 max-w-full text-xs font-black uppercase leading-relaxed tracking-[0.14em] text-cyan-100 sm:mb-5 sm:tracking-[0.18em]">
-        👉 Tu tranquilidad, nuestra garantía.
+        Instalador de gas clase 3 · SEC
       </p>
 
+      <!-- Encabezado pedido por Don Hernán (21 nov 2026): "Mister Gas, servicio integral de gasfitería". -->
       <h1 class="text-shadow-md max-w-full font-heading text-h1 font-extrabold tracking-tight text-white md:max-w-3xl">
-        Detección de Fugas y Gasfitería Autorizada
+        <span class="block text-[0.62em] text-cyan-200">{BUSINESS.name}</span>
+        Servicio Integral de Gasfitería
       </h1>
 
       <p class="mt-5 max-w-full text-lead font-medium text-gray-200 sm:mt-6 md:max-w-2xl">
-        Excelencia técnica en mantención de calefones y detección de fugas. Intervenciones seguras y certificadas por la SEC.
-        Atendemos en {communesText()}.
+        Instalaciones y reparaciones de gas, agua potable y alcantarillado. Además, calefones, detección de fugas y
+        destapes.<span class="hidden sm:inline"> Atendemos en {communesText()}.</span>
       </p>
-
-      <AfterHoursNotice />
 
       <div class="mt-6 flex w-full max-w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
         <a
@@ -84,6 +84,8 @@ const heroImages = [
           Llamar ahora
         </a>
       </div>
+
+      <AfterHoursNotice />
 
       <p class="mt-4 text-sm font-bold text-emerald-100">
         <span aria-hidden="true">✓</span> Pagas al terminar. Sin anticipos.

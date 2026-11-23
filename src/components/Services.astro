@@ -6,6 +6,39 @@ import logo from '../assets/logo-mister-gas.png';
 
 const services = [
   {
+    id: 'gasfiteria',
+    title: 'Servicio Integral de Gasfitería',
+    short: 'Gas, agua potable, alcantarillado y artefactos: un solo equipo para tu hogar.',
+    modalTitle: 'Gasfitería integral con técnico SEC.',
+    detail:
+      'Instalaciones y reparaciones de gas, agua potable y alcantarillado, calefones, detección de fugas, destapes y grifería. Un solo equipo certificado por la SEC se hace cargo de todo.',
+    cta: 'Cotizar por WhatsApp',
+    image: '/images/carrusel-1.webp',
+    alt: 'Gasfiter ajustando con una llave una conexión de cañería de cobre'
+  },
+  {
+    id: 'gas',
+    title: 'Instalación y Reparación de Gas',
+    short: 'Instalaciones domiciliarias con declaración TC6 ante la SEC.',
+    modalTitle: 'Instalaciones de gas en regla.',
+    detail:
+      'Ejecutamos instalaciones domiciliarias de gas, modificaciones y reparaciones. Cuando corresponde, tramitamos la declaración TC6 ante la SEC, conforme a nuestra licencia de instalador de gas clase 3.',
+    cta: 'Cotizar instalación de gas',
+    image: '/images/servicios/fugas.webp',
+    alt: 'Detector electrónico revisando una cañería de gas'
+  },
+  {
+    id: 'sanitario',
+    title: 'Agua Potable y Alcantarillado',
+    short: 'Redes, ampliaciones y proyectos sanitarios según el RIDAA.',
+    modalTitle: 'Redes de agua y alcantarillado según norma.',
+    detail:
+      'Redes domiciliarias de agua potable y alcantarillado, modificaciones, ampliaciones, cámaras de inspección y proyectos sanitarios conforme al RIDAA. Los planos y documentos técnicos los elaboramos y firmamos con un constructor civil.',
+    cta: 'Cotizar proyecto',
+    image: '/images/servicios/redes.webp',
+    alt: 'Red de cañerías de agua potable con válvulas y manómetros'
+  },
+  {
     id: 'calefones',
     title: 'Instalación, Mantención y Reparación de Calefones',
     short: 'Instalación, diagnóstico y mantención para agua caliente segura.',
@@ -24,19 +57,8 @@ const services = [
     detail:
       'No rompas paredes innecesariamente. Utilizamos equipos de termografía y ultrasonido para localizar el origen exacto de la filtración. Diagnóstico rápido, preciso y profesional para evitar daños mayores.',
     cta: 'Solicitar detección urgente',
-    image: '/images/servicios/fugas.webp',
-    alt: 'Detector electrónico de fugas de gas junto a una cañería de gas'
-  },
-  {
-    id: 'redes',
-    title: 'Redes de Agua Potable y Sanitarias',
-    short: 'Soluciones para redes domiciliarias y comerciales.',
-    modalTitle: 'Redes sanitarias seguras y certificadas.',
-    detail:
-      'Diseñamos e instalamos redes de agua potable y sanitarias bajo estrictas normas de ingeniería. Garantizamos estanqueidad, durabilidad y materiales de primera calidad para tu tranquilidad.',
-    cta: 'Cotizar instalación',
-    image: '/images/servicios/redes.webp',
-    alt: 'Red de cañerías de agua potable con válvulas y manómetros'
+    image: '/images/carrusel-3.webp',
+    alt: 'Técnico revisando un muro con una cámara termográfica'
   },
   {
     id: 'destapes',
@@ -48,17 +70,6 @@ const services = [
     cta: 'Solicitar destape',
     image: '/images/servicios/destapes.webp',
     alt: 'Técnico destapando un alcantarillado con una máquina de cable'
-  },
-  {
-    id: 'griferia',
-    title: 'Reparación de Grifería y Artefactos',
-    short: 'Instalación, cambio y reparación de piezas sanitarias.',
-    modalTitle: 'Grifería impecable, funcionamiento óptimo.',
-    detail:
-      '¿Goteos molestos o baja presión? Reparamos y renovamos grifería y artefactos sanitarios de alta gama. Devolvemos la estética y funcionalidad a tu baño o cocina con mano de obra experta.',
-    cta: 'Reparar ahora',
-    image: '/images/servicios/griferia.webp',
-    alt: 'Llave inglesa ajustando la grifería de un lavamanos'
   }
 ];
 
@@ -77,10 +88,10 @@ const servicesData = services.map((service) => ({
     <div data-reveal class="mx-auto max-w-2xl text-center">
       <p class="font-sans text-xs font-black uppercase tracking-[0.18em] text-cyan-300">Servicios técnicos</p>
       <h2 class="mt-4 font-heading text-h2 font-extrabold">
-        Soluciones Especializadas
+        Todo en gasfitería, un solo equipo
       </h2>
       <p class="mt-4 font-sans text-body text-gray-300">
-        Atención profesional para fugas, redes, calefones, destapes y grifería con enfoque rápido, limpio y certificado.
+        Gas, agua potable, alcantarillado, calefones, fugas y destapes, con técnicos certificados por la SEC.
       </p>
     </div>
 
@@ -90,7 +101,7 @@ const servicesData = services.map((service) => ({
           <article
             data-reveal
             class={`group relative min-h-[25rem] overflow-hidden rounded-3xl border bg-white/10 p-8 shadow-2xl backdrop-blur-lg transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 focus-within:-translate-y-1 focus-within:bg-white/20 ${
-              service.id === 'calefones'
+              service.id === 'gasfiteria'
                 ? 'border-emerald-300/60 shadow-emerald-500/25 ring-2 ring-emerald-300/40 lg:scale-[1.03]'
                 : 'border-white/20 shadow-black/20'
             }`}
@@ -107,9 +118,9 @@ const servicesData = services.map((service) => ({
 
             <div class="flex h-full flex-col justify-end">
               {
-                service.id === 'calefones' && (
+                service.id === 'gasfiteria' && (
                   <span class="mb-5 inline-flex w-fit rounded-full border border-emerald-200/50 bg-emerald-400/20 px-4 py-2 font-sans text-xs font-black uppercase tracking-[0.14em] text-emerald-100 backdrop-blur-md">
-                    Servicio destacado
+                    Servicio principal
                   </span>
                 )
               }

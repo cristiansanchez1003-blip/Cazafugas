@@ -39,9 +39,18 @@ const businessJsonLd = {
     },
   ],
   paymentAccepted: BUSINESS.paymentAccepted,
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'Licencia',
+    name: BUSINESS.gasLicense,
+    recognizedBy: {
+      '@type': 'GovernmentOrganization',
+      name: 'Superintendencia de Electricidad y Combustibles (SEC)',
+    },
+  },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Servicios de gasfitería',
+    name: 'Servicio integral de gasfitería',
     itemListElement: BUSINESS.services.map((service) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name: service.name },

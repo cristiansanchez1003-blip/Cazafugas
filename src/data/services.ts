@@ -1,15 +1,15 @@
 // src/data/services.ts
-// Páginas de servicio (PLAN-MAESTRO 3.1). Cada entrada genera /<slug> con su H1, proceso,
-// preguntas propias y JSON-LD Service.
-// Regla 3: los textos usan solo lo que la web ya decía o está confirmado en la sección 3
-// (equipos, marcas, maquinaria, SEC, horario, comunas, pago). Nada de precios, plazos ni
-// garantías hasta que Don Hernán los confirme. Que él revise estos textos antes de publicar.
+// Páginas de servicio (PLAN-MAESTRO 3.1 y Fase 4). Cada entrada genera /<slug> con su H1,
+// proceso, preguntas propias y JSON-LD Service.
+// Regla 3: los textos usan solo lo que la web ya decía, lo confirmado en la sección 3 o lo que
+// Don Hernán escribió el 21 nov 2026 (licencia de gas clase 3, TC6, RIDAA, constructor civil).
+// Nada de precios, plazos ni garantías hasta que él los confirme. Que él revise estos textos.
 import { BUSINESS, communesText } from '../config/business';
 import type { FaqItem } from './faq';
 
 export type ServicePage = {
   slug: string;
-  /** Id del servicio en el modal de la portada y en data-service. */
+  /** Id del servicio en la portada y en data-service. */
   serviceId: string;
   name: string;
   title: string;
@@ -21,6 +21,14 @@ export type ServicePage = {
   includes: string[];
   steps: { title: string; text: string }[];
   safety?: { title: string; text: string };
+  /** Recuadro informativo (azul), por ejemplo el respaldo profesional de un servicio. */
+  note?: { title: string; text: string };
+  /** Muestra "Pagas al terminar. Sin anticipos." bajo los botones. */
+  payOnCompletion: boolean;
+  /** Página madre en la ruta de navegación (por ejemplo, gasfitería integral). */
+  parent?: string;
+  /** Páginas hijas que se destacan como "servicios especializados". */
+  specialties?: string[];
   faq: FaqItem[];
   waMessage: string;
 };
@@ -49,53 +57,173 @@ const gasSafety = {
 
 export const SERVICE_PAGES: ServicePage[] = [
   {
-    slug: 'deteccion-de-fugas',
-    serviceId: 'fugas',
-    name: 'Detección de fugas de agua y gas',
-    title: `Detección de Fugas de Agua y Gas sin Romper | ${BUSINESS.name}`,
-    description: 'Ubicamos fugas de agua y gas con ultrasonido, presión controlada y termografía antes de romper. Técnico SEC. Pagas al terminar, sin anticipos.',
-    h1: 'Detección de fugas de agua y gas sin romper',
-    intro:
-      'Una fuga escondida en un muro o bajo el piso hace subir la cuenta y daña tu casa. Antes de romper, la ubicamos con equipos de ultrasonido, presión controlada y termografía, para intervenir solo donde está la filtración.',
-    image: '/images/servicios/fugas.webp',
-    imageAlt: 'Detector electrónico de fugas de gas junto a una cañería de gas',
+    slug: 'gasfiter',
+    serviceId: 'gasfiteria',
+    name: 'Gasfitería integral',
+    title: `Gasfiter SEC y Gasfitería Integral en Puente Alto | ${BUSINESS.name}`,
+    description: `Gasfitería integral: instalaciones de gas, agua potable y alcantarillado, calefones, fugas y destapes. Gasfiter SEC, ${hours}.`,
+    h1: 'Gasfitería integral con gasfiter certificado SEC',
+    intro: `Instalaciones y reparaciones de gas, agua potable y alcantarillado, además de calefones, detección de fugas, destapes y grifería. Un solo equipo para todo tu hogar en ${communesText()}.`,
+    image: '/images/carrusel-1.webp',
+    imageAlt: 'Gasfiter ajustando con una llave una conexión de cañería de cobre',
     includes: [
-      'Detección de fugas de agua potable',
-      'Detección de fugas de gas',
-      'Reparación de la fuga una vez ubicada',
-      'Revisión de humedad, manchas y baja presión',
+      'Instalación y reparación de gas, con declaración TC6 ante la SEC cuando corresponde',
+      'Redes de agua potable y alcantarillado, ampliaciones y proyectos sanitarios',
+      'Instalación, mantención y reparación de calefones',
+      'Detección y reparación de fugas de agua y gas',
+      'Destapes de alcantarillado y cañerías',
+      'Reparación y cambio de grifería y artefactos sanitarios',
     ],
     steps: [
       {
-        title: 'Nos cuentas qué ves',
-        text: 'Humedad, manchas, una cuenta de agua más alta de lo normal u olor a gas. Escríbenos o llámanos.',
+        title: 'Escribes o llamas',
+        text: `Cuéntanos qué necesitas por WhatsApp o por teléfono, ${hours}.`,
       },
       {
-        title: 'Ubicamos la fuga con equipos',
-        text: 'Ultrasonido, presión controlada y termografía para acotar el punto exacto antes de intervenir.',
+        title: 'Vamos a tu casa',
+        text: 'Un técnico autorizado SEC revisa el problema y te explica la solución antes de empezar.',
       },
       stepPay,
     ],
-    safety: gasSafety,
+    payOnCompletion: true,
+    specialties: ['instalacion-de-gas', 'agua-potable-y-alcantarillado', 'calefones', 'deteccion-de-fugas', 'destapes'],
     faq: [
       {
-        question: '¿Hay que romper para encontrar una fuga?',
+        question: '¿Qué incluye la gasfitería integral?',
         answer:
-          'Primero ubicamos el punto con ultrasonido, presión controlada y termografía. Así se interviene solo donde está la filtración, en vez de romper a ciegas.',
+          'Instalaciones y reparaciones de gas, agua potable y alcantarillado, calefones, detección de fugas, destapes y grifería. Un solo equipo se hace cargo de todo.',
       },
       {
-        question: '¿Detectan fugas de gas?',
-        answer: 'Sí. Hacemos detección de fugas de agua y de gas, con técnico autorizado SEC.',
+        question: '¿Pueden hacer instalaciones de gas con declaración ante la SEC?',
+        answer: `Sí. ${BUSINESS.gasLicense}; tramitamos la declaración TC6 cuando el trabajo lo requiere.`,
       },
       {
-        question: '¿Qué señales indican una fuga de agua?',
-        answer:
-          'Manchas de humedad en muros o pisos, una cuenta de agua más alta de lo normal, baja presión o el medidor que sigue avanzando con todas las llaves cerradas.',
+        question: '¿Trabajan de noche o los fines de semana?',
+        answer: `No. Atendemos ${hours}; no hacemos trabajos nocturnos.`,
       },
-      faqPayment,
       faqCommunes,
     ],
-    waMessage: 'Hola, necesito una detección de fugas. Mi comuna es: ',
+    waMessage: 'Hola, necesito un gasfiter. Mi comuna es: ',
+  },
+  {
+    slug: 'instalacion-de-gas',
+    serviceId: 'gas',
+    name: 'Instalación y reparación de gas',
+    title: `Instalación de Gas y Declaración TC6 SEC | ${BUSINESS.name}`,
+    description:
+      'Instalaciones de gas domiciliarias, modificaciones y reparaciones, con declaración TC6 ante la SEC cuando corresponde. Instalador de gas clase 3.',
+    h1: 'Instalación de gas con declaración TC6',
+    intro:
+      'Instalaciones domiciliarias de gas, modificaciones y reparaciones. Tramitamos la declaración TC6 ante la SEC cuando corresponde, con licencia de instalador clase 3.',
+    image: '/images/servicios/fugas.webp',
+    imageAlt: 'Detector electrónico revisando una cañería de gas',
+    includes: [
+      'Instalaciones domiciliarias de gas',
+      'Modificaciones de instalaciones existentes',
+      'Reparación de instalaciones de gas',
+      'Tramitación de la declaración TC6 ante la SEC, cuando corresponde',
+      'Conexión de calefones y artefactos a gas',
+    ],
+    steps: [
+      {
+        title: 'Nos cuentas qué necesitas',
+        text: 'Instalación nueva, modificación o reparación: dinos qué artefactos tienes y dónde están.',
+      },
+      {
+        title: 'Revisión con instalador SEC',
+        text: 'Un instalador con licencia clase 3 revisa la instalación y te explica qué trabajo corresponde y si requiere declaración TC6.',
+      },
+      {
+        title: 'Ejecución y declaración',
+        text: 'Hacemos el trabajo y, cuando corresponde, presentamos la declaración TC6 ante la SEC.',
+      },
+    ],
+    // TODO(confirmar) con Don Hernán si en instalaciones nuevas también se paga al terminar.
+    payOnCompletion: false,
+    safety: gasSafety,
+    parent: 'gasfiter',
+    faq: [
+      {
+        question: '¿Qué es la declaración TC6?',
+        answer:
+          'Es la declaración con que un instalador autorizado inscribe ante la SEC una instalación interior de gas. La tramitamos cuando el trabajo lo requiere.',
+      },
+      {
+        question: '¿Qué trabajos de gas pueden hacer?',
+        answer:
+          'Instalaciones domiciliarias, modificaciones y reparaciones, conforme a las atribuciones de nuestra licencia de instalador de gas clase 3 otorgada por la SEC.',
+      },
+      {
+        question: '¿Por qué contratar un instalador autorizado por la SEC?',
+        answer:
+          'Porque una instalación de gas debe ejecutarla y declararla un instalador autorizado. Así tu instalación queda segura y en regla.',
+      },
+      faqCommunes,
+    ],
+    waMessage: 'Hola, necesito una instalación o reparación de gas. Mi comuna es: ',
+  },
+  {
+    slug: 'agua-potable-y-alcantarillado',
+    serviceId: 'sanitario',
+    name: 'Agua potable y alcantarillado',
+    title: `Instalaciones de Agua Potable y Alcantarillado | ${BUSINESS.name}`,
+    description:
+      'Redes domiciliarias de agua potable y alcantarillado, ampliaciones y proyectos sanitarios según el RIDAA, con planos firmados por constructor civil.',
+    h1: 'Instalaciones de agua potable y alcantarillado',
+    intro:
+      'Redes domiciliarias de agua potable y alcantarillado, modificaciones, ampliaciones y proyectos sanitarios según el reglamento RIDAA.',
+    image: '/images/servicios/redes.webp',
+    imageAlt: 'Red de cañerías de agua potable con válvulas y manómetros',
+    includes: [
+      'Redes domiciliarias de agua potable',
+      'Modificaciones y ampliaciones de redes',
+      'Redes de evacuación de aguas servidas',
+      'Cámaras de inspección y demás instalaciones domiciliarias',
+      'Proyectos sanitarios con sus planos y documentos técnicos',
+    ],
+    steps: [
+      {
+        title: 'Nos cuentas el proyecto',
+        text: 'Instalación nueva, ampliación o modificación de tu red de agua potable o alcantarillado.',
+      },
+      {
+        title: 'Revisión en terreno',
+        text: 'Revisamos la red y te explicamos qué trabajo y qué documentos técnicos corresponden según el RIDAA.',
+      },
+      {
+        title: 'Ejecución y documentos',
+        text: 'Ejecutamos la instalación y preparamos los planos y documentos técnicos que el proyecto requiera.',
+      },
+    ],
+    // TODO(confirmar) con Don Hernán cómo se paga un proyecto sanitario.
+    payOnCompletion: false,
+    note: {
+      title: 'Proyectos sanitarios con respaldo profesional',
+      text: 'Para los proyectos sanitarios trabajamos con un constructor civil, que participa en la elaboración y firma de los planos y documentos técnicos que exige cada caso.',
+    },
+    parent: 'gasfiter',
+    faq: [
+      {
+        question: '¿Qué es el RIDAA?',
+        answer:
+          'Es el Reglamento de Instalaciones Domiciliarias de Agua Potable y Alcantarillado. Fija cómo se diseñan y ejecutan las redes de agua y alcantarillado de una vivienda.',
+      },
+      {
+        question: '¿Quién firma los planos?',
+        answer:
+          'En los proyectos sanitarios trabajamos con un constructor civil, que participa en la elaboración y firma de los planos y documentos técnicos que correspondan.',
+      },
+      {
+        question: '¿Hacen ampliaciones de la red?',
+        answer: 'Sí. Ejecutamos modificaciones y ampliaciones de redes domiciliarias de agua potable y alcantarillado.',
+      },
+      {
+        question: '¿Y si solo tengo el alcantarillado tapado?',
+        answer: 'Para eso tenemos el servicio de destapes, con maquinaria de alta presión.',
+      },
+      faqCommunes,
+    ],
+    waMessage: 'Hola, necesito una instalación de agua potable o alcantarillado. Mi comuna es: ',
   },
   {
     slug: 'calefones',
@@ -125,7 +253,9 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       stepPay,
     ],
+    payOnCompletion: true,
     safety: gasSafety,
+    parent: 'gasfiter',
     faq: [
       {
         question: '¿Trabajan con todas las marcas?',
@@ -147,50 +277,55 @@ export const SERVICE_PAGES: ServicePage[] = [
     waMessage: 'Hola, necesito un técnico para mi calefón. Mi comuna es: ',
   },
   {
-    slug: 'gasfiter',
-    serviceId: 'redes',
-    name: 'Gasfitería',
-    title: `Gasfiter Certificado SEC en Puente Alto y La Florida | ${BUSINESS.name}`,
-    description: `Gasfiter certificado SEC: redes de agua, grifería, fugas, calefones y destapes. ${BUSINESS.hours.days} de 9 a 18. Pagas al terminar, sin anticipos.`,
-    h1: 'Gasfiter certificado SEC',
-    intro: `Redes de agua potable y sanitarias, grifería, artefactos, reparación de fugas, calefones y destapes. Atendemos en ${communesText()}, ${hours}.`,
-    image: '/images/servicios/redes.webp',
-    imageAlt: 'Red de cañerías de agua potable con válvulas y manómetros',
+    slug: 'deteccion-de-fugas',
+    serviceId: 'fugas',
+    name: 'Detección de fugas de agua y gas',
+    title: `Detección de Fugas de Agua y Gas sin Romper | ${BUSINESS.name}`,
+    description: 'Ubicamos fugas de agua y gas con ultrasonido, presión controlada y termografía antes de romper. Técnico SEC. Pagas al terminar, sin anticipos.',
+    h1: 'Detección de fugas de agua y gas sin romper',
+    intro:
+      'Una fuga escondida en un muro o bajo el piso hace subir la cuenta y daña tu casa. Antes de romper, la ubicamos con equipos de ultrasonido, presión controlada y termografía, para intervenir solo donde está la filtración.',
+    image: '/images/carrusel-3.webp',
+    imageAlt: 'Técnico revisando un muro con una cámara termográfica',
     includes: [
-      'Instalación y reparación de redes de agua potable y sanitarias',
-      'Reparación y cambio de grifería y artefactos sanitarios',
-      'Reparación de fugas',
-      'Instalación y mantención de calefones',
-      'Destapes y limpieza de cañerías',
+      'Detección de fugas de agua potable',
+      'Detección de fugas de gas',
+      'Reparación de la fuga una vez ubicada',
+      'Revisión de humedad, manchas y baja presión',
     ],
     steps: [
       {
-        title: 'Escribes o llamas',
-        text: `Cuéntanos qué necesitas por WhatsApp o por teléfono, ${hours}.`,
+        title: 'Nos cuentas qué ves',
+        text: 'Humedad, manchas, una cuenta de agua más alta de lo normal u olor a gas. Escríbenos o llámanos.',
       },
       {
-        title: 'Vamos a tu casa',
-        text: 'Un técnico autorizado SEC revisa el problema y te explica la solución antes de empezar.',
+        title: 'Ubicamos la fuga con equipos',
+        text: 'Ultrasonido, presión controlada y termografía para acotar el punto exacto antes de intervenir.',
       },
       stepPay,
     ],
+    payOnCompletion: true,
+    safety: gasSafety,
+    parent: 'gasfiter',
     faq: [
       {
-        question: '¿Qué trabajos de gasfitería hacen?',
+        question: '¿Hay que romper para encontrar una fuga?',
         answer:
-          'Redes de agua potable y sanitarias, grifería y artefactos, reparación de fugas, instalación y mantención de calefones, y destapes.',
+          'Primero ubicamos el punto con ultrasonido, presión controlada y termografía. Así se interviene solo donde está la filtración, en vez de romper a ciegas.',
       },
       {
-        question: '¿Trabajan de noche o los fines de semana?',
-        answer: `No. Atendemos ${hours}; no hacemos trabajos nocturnos.`,
+        question: '¿Detectan fugas de gas?',
+        answer: 'Sí. Hacemos detección de fugas de agua y de gas, con técnico autorizado SEC.',
       },
       {
-        question: '¿Piden anticipo?',
-        answer: 'No. Pagas al terminar el trabajo, en efectivo, transferencia o tarjeta.',
+        question: '¿Qué señales indican una fuga de agua?',
+        answer:
+          'Manchas de humedad en muros o pisos, una cuenta de agua más alta de lo normal, baja presión o el medidor que sigue avanzando con todas las llaves cerradas.',
       },
+      faqPayment,
       faqCommunes,
     ],
-    waMessage: 'Hola, necesito un gasfiter. Mi comuna es: ',
+    waMessage: 'Hola, necesito una detección de fugas. Mi comuna es: ',
   },
   {
     slug: 'destapes',
@@ -219,6 +354,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       stepPay,
     ],
+    payOnCompletion: true,
+    parent: 'gasfiter',
     faq: [
       {
         question: '¿Qué equipos usan?',
@@ -235,13 +372,28 @@ export const SERVICE_PAGES: ServicePage[] = [
   },
 ];
 
+export const pageBySlug = (slug: string) => SERVICE_PAGES.find((page) => page.slug === slug);
+
 /** Página de servicio que corresponde a cada tarjeta de la portada. */
 export const PAGE_FOR_SERVICE_ID: Record<string, string> = {
+  gasfiteria: '/gasfiter',
+  gas: '/instalacion-de-gas',
+  sanitario: '/agua-potable-y-alcantarillado',
   fugas: '/deteccion-de-fugas',
   calefones: '/calefones',
-  redes: '/gasfiter',
+  redes: '/agua-potable-y-alcantarillado',
   griferia: '/gasfiter',
   destapes: '/destapes',
+};
+
+/** Ruta de navegación: Inicio › (página madre) › página. */
+export const breadcrumbFor = (page: ServicePage) => {
+  const parent = page.parent ? pageBySlug(page.parent) : undefined;
+  return [
+    { name: 'Inicio', path: '/' },
+    ...(parent ? [{ name: parent.name, path: `/${parent.slug}/` }] : []),
+    { name: page.name, path: `/${page.slug}/` },
+  ];
 };
 
 export const serviceJsonLd = (page: ServicePage) => {
@@ -262,10 +414,12 @@ export const serviceJsonLd = (page: ServicePage) => {
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${BUSINESS.domain}/` },
-        { '@type': 'ListItem', position: 2, name: page.name, item: url },
-      ],
+      itemListElement: breadcrumbFor(page).map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name,
+        item: `${BUSINESS.domain}${crumb.path}`,
+      })),
     },
   ];
 };
