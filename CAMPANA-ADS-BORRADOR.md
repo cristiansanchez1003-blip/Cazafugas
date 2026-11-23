@@ -31,7 +31,7 @@ Todos los textos tienen el conteo de caracteres hecho con `contar_caracteres.py`
 | Nombre | `Google \| Search \| Alta intención \| Gasfitería integral \| Comunas` |
 | Tipo | Búsqueda |
 | Puja | CPC manual |
-| Presupuesto diario | `[definir con Don Hernán]` |
+| Presupuesto diario | Unos $3.300 CLP: la propuesta aceptada del 3 nov considera $100.000 de anuncios (bitácora). Confirmar con Cristian si es mensual y si incluye IVA |
 | Redes | Sin Red de Display y sin socios de búsqueda |
 | Ubicaciones | Puente Alto, La Florida, Macul, San José de Maipo y Pirque. Opción **Presencia** (no "Presencia o interés") |
 | Idioma | Español |
